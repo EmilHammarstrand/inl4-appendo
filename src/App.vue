@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    asd
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Form />
+    <Home />
+    <List />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
+import Form from "./components/Form"
+import Home from "./components/Home"
+import List from "./components/List"
 export default {
   name: 'App',
   components: {
+<<<<<<< HEAD
     HelloWorld
   },
   data: () => ({
@@ -40,6 +43,12 @@ export default {
 
 
   })
+=======
+    Form,
+    Home,
+    List
+  }
+>>>>>>> fbb0b38017f0c2986b99fa1a23c91a525b50d68c
 }
 </script>
 
@@ -48,8 +57,5 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
