@@ -19,7 +19,7 @@
              </select>
          </div>
         <div class="form-group">
-            <button @click="postActivityBtn"> Post </button>
+            <button @click="postActivityBtn"> Post</button>
         </div>
          
         <span> {{name}} {{activity}} {{selected}}</span>
