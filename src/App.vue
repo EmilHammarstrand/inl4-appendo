@@ -13,7 +13,33 @@ export default {
   name: 'App',
   components: {
     HelloWorld
-  }
+  },
+  data: () => ({
+    activityList: [
+      {
+        activity: "Take a walk around the house",
+        category: "exercise",
+        score: "3",
+        source: "google"
+      },
+      {
+        activity: "Grab a snack",
+        category: "food",
+        score: "3",
+        source: "Fanny"
+      },
+      {
+         activity:"powernap",
+         category:"relax",
+         score:"3",
+         source:"computer"
+      }
+
+    ]
+
+
+
+  })
 }
 </script>
 
