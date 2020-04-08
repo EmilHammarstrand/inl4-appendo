@@ -24,10 +24,10 @@
             <input name="estimatedTime" type="number" v-model="estimatedTime" min="3" max="15" >
         </div>
         <div class="form-group">
-            <button :disabled="!isCompleted || !nameIsValid || !activityIsValid" @click="formResult = true"> Post</button>
+            <button :disabled="!isCompleted || !nameIsValid || !activityIsValid" @click="formResult = true;"> Post</button>
         </div>
          
-        <span v-if="formResult"> Hello {{name}}, you choose {{activity}} in category {{selected}}, estimated time {{estimatedTime}} minutes {{}}</span>
+        <span v-if="formResult"> Hello {{name}}, you choose {{activity}} in category {{selected}}, estimated time {{estimatedTime}} minutes -{{todaysDate}}- </span>
     </div>
 </template>
 
@@ -71,7 +71,8 @@ export default {
             return this.name && this.activity && this.selected && this.estimatedTime;
         },
         todaysDate(){
-            return new Date().toLocaleString();
+         let todaysDate = new Date().toLocaleString();
+         return todaysDate;
         }
     },
 
@@ -79,6 +80,7 @@ export default {
         postActivityBtn(){
             
         }
+        
     }
 
 
