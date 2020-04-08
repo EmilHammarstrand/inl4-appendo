@@ -18,30 +18,41 @@ export default {
     Home,
     List
   },
+  
   data: () => ({
     activityList: [
       {
         activity: "Take a walk around the house",
         category: "exercise",
         score: "3",
-        source: "google"
+        tipster: "google",
+        estimatedTime: "5"
       },
       {
         activity: "Grab a snack",
         category: "food",
         score: "3",
-        source: "Fanny"
+        tipster: "Fanny",
+        estimatedTime: "7"
       },
       {
          activity:"powernap",
          category:"relax",
          score:"3",
-         source:"computer"
+         tipster:"computer",
+         estimatedTime:"10"
+      },
+      {
+         activity:"powernap",
+         category:"relax",
+         score:"3",
+         tipster:"computer",
+         estimatedTime:"10"
       }
 
     ]
   })
-  
+
 }
 </script>
 
