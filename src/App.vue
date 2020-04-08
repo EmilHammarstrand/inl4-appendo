@@ -14,11 +14,11 @@ import List from "./components/List"
 export default {
   name: 'App',
   components: {
-
     Form,
     Home,
     List
   },
+  
   data: () => ({
     activityList: [
       {
