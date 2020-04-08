@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Form />
     <Home />
-    <List :activityList="activityList" />
+    <List />
+    <Form :activityList="activityList"/>
   </div>
 </template>
 
