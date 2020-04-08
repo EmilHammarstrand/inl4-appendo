@@ -42,13 +42,6 @@ export default {
          score:"3",
          tipster:"computer",
          estimatedTime:"10"
-      },
-      {
-         activity:"powernap",
-         category:"relax",
-         score:"3",
-         tipster:"computer",
-         estimatedTime:"10"
       }
 
     ]

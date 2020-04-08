@@ -4,11 +4,11 @@
         <button>Add activity</button>
 
         <div class="sortButtons">
-            <button @click="sortByThis('activity')">Activity</button>
-            <button @click="sortByThis('category')">Category</button>
-            <button @click="sortByThis('tipster')">Tipster</button>
-            <button @click="sortByThis('estimatedTime')">Time</button>
-            <button @click="sortByThis('score')">Score</button>
+            <button :class="activityIsActive" @click="sortByThis('activity')">Activity</button>
+            <button :class="categoryIsActive" @click="sortByThis('category')">Category</button>
+            <button :class="tipsterIsActive" @click="sortByThis('tipster')">Tipster</button>
+            <button :class="estimatedTimeIsActive" @click="sortByThis('estimatedTime')">Time</button>
+            <button :class="scoreIsActive" @click="sortByThis('score')">Score</button>
         </div>
         
         <div v-for="activity in sortList" class="activityCard" :key="activity.activity">
@@ -32,10 +32,34 @@
 export default {
     data: () => ({
 
-        sortBy: "default"
+        sortBy: "default",
+        activityActive: false,
+        categoryActive: false,
+        tipsterActive: false,
+        estimatedTimeActive: false,
+        scoreActive: false
 
     }),
     computed:{
+
+        //glöm inte att lägga till en funktion som ändrar datan för knapparna till true/false
+
+        activityIsActive(){
+            return this.activityActive ? "activeClass" : "";
+        },
+        categoryIsActive(){
+            return this.categoryActive ? "activeClass" : "";
+        },
+        tipsterIsActive(){
+            return this.tipsterActive ? "activeClass" : "";
+        },
+        estimatedTimeIsActive(){
+            return this.estimatedTimeActive ? "activeClass" : "";
+        },
+        scoreIsActive(){
+            return this.scoreActive ? "activeClass" : "";
+        },//slut active :P :P :P
+      
 
         sortList(){
 
@@ -79,35 +103,37 @@ export default {
             }
             if(this.sortBy == "estimatedTime"){
                 copy.sort( (a,b) => {
-                if(a.estimatedTime.toLowerCase() < b.estimatedTime.toLowerCase()){
-                    return -1;
-                } else if(a.estimatedTime.toLowerCase() > b.estimatedTime.toLowerCase()){
-                    return 1;
-                } else {
-                    return 0;
-                }
-            })
+                    if(a.estimatedTime.toLowerCase() < b.estimatedTime.toLowerCase()){
+                        return -1;
+                    } else if(a.estimatedTime.toLowerCase() > b.estimatedTime.toLowerCase()){
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                })
             return copy
             }
             if(this.sortBy == "score"){
                 copy.sort( (a,b) => {
-                if(a.score.toLowerCase() < b.score.toLowerCase()){
-                    return -1;
-                } else if(a.score.toLowerCase() > b.score.toLowerCase()){
-                    return 1;
-                } else {
-                    return 0;
-                }
-            })
+                    if(a.score.toLowerCase() < b.score.toLowerCase()){
+                        return -1;
+                    } else if(a.score.toLowerCase() > b.score.toLowerCase()){
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                })
             return copy
             }
 
             return copy
+        }//slut sortlist
             
             
 
            
-        },
+        
+        
         
     },//slut computed
     methods:{
@@ -171,6 +197,10 @@ export default {
         height: 1.7rem;
         padding: .6rem;
     }
+    .sortButtons > .activeClass{
+        background-color: #EFC748;
+    }
+
 
 
 </style>
