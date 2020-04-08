@@ -2,12 +2,12 @@
     <div class="root">
         <div class="form-group">
             <label for="name">Tipser: </label> <br />
-            <input type="text" name="name" placeholder="Enter your name" v-model="name" :class="nameClass" @blur.once="nameIsTouched = true" >
+            <input type="text" name="name" placeholder="Enter your name..." v-model="name" :class="nameClass" @blur.once="nameIsTouched = true" >
             <span v-if="nameIsTouched && !nameIsValid" class="error"> {{ nameErrorMessage }} </span>
         </div>
         <div class="form-group">
             <label for="activity">Activity: </label> <br />
-            <input type="text" placeholder="Enter a short suggestion" name="activity" v-model="activity" :class="activityClass" @blur.once="activityIsTouched = true" >
+            <input type="text" placeholder="Enter a short suggestion..." name="activity" v-model="activity" :class="activityClass" @blur.once="activityIsTouched = true" >
             <span v-if="!activityIsValid && activityIsTouched" class="error"> {{ activityErrorMessage }} </span>
         </div>
         <div class="form-group">
@@ -26,7 +26,7 @@
             <span v-if="!timeIsValid && timeIsTouched" class="error"> {{ timeErrorMessage }} </span>
         </div>
         <div class="form-group">
-            <button :disabled="!isCompleted || !nameIsValid || !activityIsValid" @click="formResult = true;"> Post</button>
+            <button :disabled="!isCompleted || !nameIsValid || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate();"> Post</button>
         </div>
          
         <span v-if="formResult"> Hello {{name}}, you choose {{activity}} in category {{selected}}, estimated time {{estimatedTime}} minutes, published: {{todaysDate}} </span>
@@ -45,7 +45,8 @@ export default {
         activityIsTouched: false,
         categoryIsTouched: false,
         timeIsTouched: false,
-        formResult: false
+        formResult: false,
+        arr: ["hej", "qwe", "asd" ]
     }),
 
     computed: {
@@ -103,6 +104,15 @@ export default {
     methods: {
         postActivityBtn(){
             
+        },
+        findDuplicate(){
+           /*  function findD(element){
+                return (element === this.activity)
+            } console.log(arr.some(findD)) */
+            this.arr.some(function(title, index){
+                console.log(index, title);
+                return title.indexOf(this.activity) > -1;
+            })
         }
     }
 
@@ -112,7 +122,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
     input.valid { border-color: green; }
     input.invalid { border-color: red; }
 
@@ -132,5 +142,19 @@ export default {
     .estTime{
         width: 2.3em;
     }
-</style>
 
+    label, input, button, option{
+        font-family: Quicksand;
+    }
+    label{
+        color: white;
+    }
+    input{
+        color: black;
+    }
+
+    body{
+        background-color: #2F4858;
+    }
+
+</style>
