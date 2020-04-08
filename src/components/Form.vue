@@ -11,18 +11,23 @@
             <span v-if="!activityIsValid && activityIsTouched" class="error"> {{ activityErrorMessage }} </span>
         </div>
         <div class="form-group">
-             <select v-model="selected">
+            <label for="dropdown">Category: </label>
+             <select name="dropdown" v-model="selected">
                 <option>Outside</option>
                 <option>Food</option>
                 <option>Training</option>
                 <option>Thinking</option>
              </select>
-         </div>
+        </div>
         <div class="form-group">
-            <button @click="postActivityBtn"> Post</button>
+            <label for="estimatedTime">Estimated time: </label>
+            <input placeholder="vote" name="estimatedTime" type="number" v-model="estimatedTime" min="3" max="15" >
+        </div>
+        <div class="form-group">
+            <button :disabled="!isCompleted" @click="clearAll(); formResult = true"> Post</button>
         </div>
          
-        <span> {{name}} {{activity}} {{selected}}</span>
+        <span v-if="formResult"> Hello {{name}}, you choose {{activity}} in category {{selected}}, estimated time {{estimatedTime}}</span>
     </div>
 </template>
 
@@ -31,8 +36,11 @@ export default {
     data: () => ({
         name: "",
         activity: "",
+        selected: "",
+        estimatedTime: "",
         nameIsTouched: false,
-        activityIsTouched: false
+        activityIsTouched: false,
+        formResult: false
     }),
 
     computed: {
@@ -47,21 +55,28 @@ export default {
 			return this.nameIsValid ? 'valid' : 'invalid';
         },
         activityErrorMessage(){
-            return "Max characters is 10"
+            return "Must be between 2-10 characters"
         },
         activityIsValid() {
-            return this.activity.length <= 10;
+            let asd = this.activity.length <= 10 && this.activity.length >= 2;
+            return asd;
         },
+
         activityClass() {
 			if( !this.activityIsTouched ) return '';
 			return this.activityIsValid ? 'valid' : 'invalid';
+        },
+        isCompleted(){
+            return this.name && this.activity && this.selected && this.estimatedTime;
         }
     },
 
     methods: {
         postActivityBtn(){
-            this.name;
-            this.activity;
+            
+        },
+        clearAll(){
+            this.name && this.activity == "";
         }
     }
 
