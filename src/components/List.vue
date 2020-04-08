@@ -12,11 +12,17 @@
         </div>
         
         <div v-for="activity in sortList" class="activityCard" :key="activity.activity">
-            <h3>{{activity.activity}}</h3> 
-            <p> <span>Category:</span>  {{activity.category}}</p>
-            <p> <span>Score: </span> {{activity.score}}</p>
-            <p> <span>Tipster:</span>  {{activity.tipster}}</p>
-            <p> <span>Estimated time:</span>  {{activity.estimatedTime}}</p>
+            <div>            
+                <h3>{{activity.activity}}</h3> 
+                <p> <span>Category:</span>  {{activity.category}}</p>
+                <p> <span>Score: </span> {{activity.score}}</p>
+                <p> <span>Tipster:</span>  {{activity.tipster}}</p>
+                <p> <span>Estimated time:</span>  {{activity.estimatedTime}}</p>
+            </div>
+
+            <div>
+                <img @click="emitDelete(activity.activity)" src="../assets/garbage.png" alt="delete" class="delete">
+            </div>
         </div>
         
     </div>
@@ -107,8 +113,10 @@ export default {
     methods:{
         sortByThis(sortThis){
             this.sortBy = sortThis;
-    
         },
+        emitDelete(key){
+            this.$emit('emitDelete', key);
+        }
 
     },
 
@@ -128,8 +136,15 @@ export default {
         margin-bottom: .5rem;
         background-color:#465F6F;
         color:white;
-   
+        display: flex;
+        justify-content: space-between;
 
+    }
+    div.activityCard div:first-child{
+        border: 2px solid red;
+    }
+    div.activityCard div:last-child{
+        /* border: 2px solid grey; */
     }
     span{
         font-weight: 600;
@@ -150,6 +165,11 @@ export default {
         border:1px solid white;
         border-radius:0.5em;
        
+    }
+    img.delete{
+        object-fit: scale-down;
+        height: 1.7rem;
+        padding: .6rem;
     }
 
 

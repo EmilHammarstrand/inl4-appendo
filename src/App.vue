@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Home />
-    <List />
+    <List @emitDelete="deleteItem($event)" 
+    :activityList="activityList"/>
     <Form :activityList="activityList"/>
   </div>
 </template>
@@ -51,7 +52,14 @@ export default {
       }
 
     ]
-  })
+  }),
+  methods: {
+    deleteItem(key){
+       this.activityList = this.activityList.filter( item => item.activity != key)
+         
+    }
+  }
+  
 
 }
 </script>
