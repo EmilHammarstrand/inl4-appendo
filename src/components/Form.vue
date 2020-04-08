@@ -21,13 +21,13 @@
         </div>
         <div class="form-group">
             <label for="estimatedTime">Estimated time: </label>
-            <input placeholder="vote" name="estimatedTime" type="number" v-model="estimatedTime" min="3" max="15" >
+            <input name="estimatedTime" type="number" v-model="estimatedTime" min="3" max="15" >
         </div>
         <div class="form-group">
-            <button :disabled="!isCompleted" @click="clearAll(); formResult = true"> Post</button>
+            <button :disabled="!isCompleted || !nameIsValid || !activityIsValid" @click="formResult = true"> Post</button>
         </div>
          
-        <span v-if="formResult"> Hello {{name}}, you choose {{activity}} in category {{selected}}, estimated time {{estimatedTime}}</span>
+        <span v-if="formResult"> Hello {{name}}, you choose {{activity}} in category {{selected}}, estimated time {{estimatedTime}} minutes {{}}</span>
     </div>
 </template>
 
@@ -38,6 +38,7 @@ export default {
         activity: "",
         selected: "",
         estimatedTime: "",
+        date: "",
         nameIsTouched: false,
         activityIsTouched: false,
         formResult: false
@@ -68,15 +69,15 @@ export default {
         },
         isCompleted(){
             return this.name && this.activity && this.selected && this.estimatedTime;
+        },
+        todaysDate(){
+            return new Date().toLocaleString();
         }
     },
 
     methods: {
         postActivityBtn(){
             
-        },
-        clearAll(){
-            this.name && this.activity == "";
         }
     }
 
