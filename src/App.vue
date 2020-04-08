@@ -2,7 +2,7 @@
   <div id="app">
     <Form />
     <Home />
-    <List />
+    <List :activityList="activityList" />
   </div>
 </template>
 
@@ -14,8 +14,9 @@ import List from "./components/List"
 export default {
   name: 'App',
   components: {
-<<<<<<< HEAD
-    HelloWorld
+    Form,
+    Home,
+    List
   },
   data: () => ({
     activityList: [
@@ -39,16 +40,8 @@ export default {
       }
 
     ]
-
-
-
   })
-=======
-    Form,
-    Home,
-    List
-  }
->>>>>>> fbb0b38017f0c2986b99fa1a23c91a525b50d68c
+  
 }
 </script>
 
