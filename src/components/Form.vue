@@ -108,14 +108,14 @@ export default {
         postActivityBtn(){
             
         },
-        
+
         findDuplicate(activity){
             if(this.activityList.some(value => value.activity == activity)){
                /*  return ""; */
                 console.log("duplicates")
             }else{
                 /* return "Duplicates" */
-                console.log("no duplicates")
+                console.log("no duplicatess")
             }
         }
     }
