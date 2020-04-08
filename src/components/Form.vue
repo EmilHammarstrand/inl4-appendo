@@ -26,12 +26,12 @@
             <span v-if="!timeIsValid && timeIsTouched" class="error"> {{ timeErrorMessage }} </span>
         </div>
         <div class="form-group">
-            <button :disabled="!isCompleted || !nameIsValid || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate();"> Post</button>
+            <button :disabled="!isCompleted || !nameIsValid || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity);"> Post</button>
         </div>
          
         <span v-if="formResult"> Hello {{name}}, you choose {{activity}} in category {{selected}}, estimated time {{estimatedTime}} minutes, published: {{todaysDate}} </span>
-    </div>
-    </template>
+    </div> 
+</template>
 
 <script>
 export default {
@@ -45,9 +45,12 @@ export default {
         activityIsTouched: false,
         categoryIsTouched: false,
         timeIsTouched: false,
-        formResult: false,
-        arr: ["hej", "qwe", "asd" ]
+        formResult: false
     }),
+
+    props: {
+        activityList: Array
+    },
 
     computed: {
         nameErrorMessage(){
@@ -92,8 +95,8 @@ export default {
             return "Must be between 3-15 minutes";
         },
         timeIsValid() {
-            let qwe = this.estimatedTime >=3 && this.estimatedTime <= 15;
-            return qwe;
+            let estTime1 = this.estimatedTime >=3 && this.estimatedTime <= 15;
+            return estTime1;
         },
         timeClass() {
 			if( !this.timeIsTouched ) return '';
@@ -105,14 +108,15 @@ export default {
         postActivityBtn(){
             
         },
-        findDuplicate(){
-           /*  function findD(element){
-                return (element === this.activity)
-            } console.log(arr.some(findD)) */
-            this.arr.some(function(title, index){
-                console.log(index, title);
-                return title.indexOf(this.activity) > -1;
-            })
+        
+        findDuplicate(activity){
+            if(this.activityList.some(value => value.activity == activity)){
+               /*  return ""; */
+                console.log("duplicates")
+            }else{
+                /* return "Duplicates" */
+                console.log("no duplicates")
+            }
         }
     }
 
