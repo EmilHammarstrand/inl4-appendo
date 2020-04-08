@@ -31,7 +31,7 @@
          
         <span v-if="formResult"> Hello {{name}}, you choose {{activity}} in category {{selected}}, estimated time {{estimatedTime}} minutes, published: {{todaysDate}} </span>
     </div>
-    </template>
+</template>
 
 <script>
 export default {
