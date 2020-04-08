@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Home />
-    <List />
+    <List :activityList="activityList" />
     <Form :activityList="activityList"/>
   </div>
 </template>
