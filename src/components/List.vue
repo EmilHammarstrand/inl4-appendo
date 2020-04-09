@@ -17,6 +17,7 @@
             <p> <span>Score: </span> {{activity.score}}</p>
             <p> <span>Tipster:</span>  {{activity.tipster}}</p>
             <p> <span>Estimated time:</span>  {{activity.estimatedTime}}</p>
+            <p> <span>Published at:</span>  {{activity.date}}</p>
         </div>
         
     </div>

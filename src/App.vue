@@ -26,28 +26,32 @@ export default {
         category: "exercise",
         score: "3",
         tipster: "google",
-        estimatedTime: "5"
+        estimatedTime: "5",
+        date: ""
       },
       {
         activity: "Grab a snack",
         category: "food",
         score: "3",
         tipster: "Fanny",
-        estimatedTime: "7"
+        estimatedTime: "7",
+        date: ""
       },
       {
          activity:"powernap",
          category:"relax",
          score:"3",
          tipster:"computer",
-         estimatedTime:"10"
+         estimatedTime:"10",
+         date: ""
       },
       {
          activity:"sleep",
          category:"relax",
          score:"3",
          tipster:"computer",
-         estimatedTime:"10"
+         estimatedTime:"10",
+         date: ""
       }
 
     ]

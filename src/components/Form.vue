@@ -114,7 +114,8 @@ export default {
                 category: this.selected,
                 score: "5",
                 tipster: this.name,
-                estimatedTime: this.estimatedTime
+                estimatedTime: this.estimatedTime,
+                date: this.todaysDate
             });
         },
 
