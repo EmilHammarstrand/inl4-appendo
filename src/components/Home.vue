@@ -1,28 +1,15 @@
 <template>
 
-    <div class="root">
-
-        <div class = "galaxy-picture">
+    <div class="home">
 
 
-            <h1>Glues to your computer during break? AppenDo helps you to break FREE</h1>
-
-
-
-
-
-
-        </div>
-
-
-
-    <h2>Button on Image</h2>
-    <p>Add a button to an image:</p>
 
     <div class="container">
-    <img src="" alt="galaxy" style="width:100%">
-    <button class="btn">Button</button>
-    </div>
+
+        <img src="./images/galaxy-blue.jpg" alt="galaxy" style="width:100%">
+            <h1>Glued to your computer during break? AppenDo helps you break FREE</h1>
+            <button class="btn">Button</button>
+        </div>
 
 
 
@@ -44,17 +31,14 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 export default {
+    name: 'Home'
 
 }
 </script>
 
 <style scoped>
 
-.galaxy-picture {
 
-background-image: url();
-
-}
 .container {
   position: relative;
   width: 100%;
@@ -86,6 +70,9 @@ background-image: url();
   background-color: black;
   color: white;
 }
+
+
+
 
 
 
