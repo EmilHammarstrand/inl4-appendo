@@ -26,7 +26,7 @@
             <span v-if="!timeIsValid && timeIsTouched" class="error"> {{ timeErrorMessage }} </span>
         </div>
         <div class="form-group">
-            <button :disabled="!isCompleted || !nameIsValid || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity);"> Post</button>
+            <button :disabled="!isCompleted || !nameIsValid || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity); postActivityBtn();"> Post</button>
         </div>
          
         <span v-if="formResult"> Hello {{name}}, you choose {{activity}} in category {{selected}}, estimated time {{estimatedTime}} minutes, published: {{todaysDate}} </span>
@@ -40,7 +40,6 @@ export default {
         activity: "",
         selected: "",
         estimatedTime: "",
-        date: "",
         nameIsTouched: false,
         activityIsTouched: false,
         categoryIsTouched: false,
@@ -106,7 +105,17 @@ export default {
 
     methods: {
         postActivityBtn(){
-            
+/*             this.name = "Enter your name";
+            this.activity = "";
+            this.estimatedTime = "";
+            this.selected = ""; */
+            this.activityList.push({
+                activity: this.activity,
+                category: this.selected,
+                score: "5",
+                tipster: this.name,
+                estimatedTime: this.estimatedTime
+            });
         },
 
         findDuplicate(activity){
