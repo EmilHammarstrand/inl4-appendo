@@ -108,7 +108,6 @@ export default {
     methods:{
         sortByThis(sortThis){
             this.sortBy = sortThis;
-    
         },
 
     },

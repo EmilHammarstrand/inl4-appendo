@@ -27,7 +27,7 @@ export default {
         score: "3",
         tipster: "google",
         estimatedTime: "5",
-        date: ""
+        date: "2020-02-09 02:09:43"
       },
       {
         activity: "Grab a snack",
@@ -35,7 +35,7 @@ export default {
         score: "3",
         tipster: "Fanny",
         estimatedTime: "7",
-        date: ""
+        date: "2019-07-21 18:02:22"
       },
       {
          activity:"powernap",
@@ -43,7 +43,7 @@ export default {
          score:"3",
          tipster:"computer",
          estimatedTime:"10",
-         date: ""
+         date: "2020-04-10 12:11:02"
       },
       {
          activity:"sleep",
@@ -51,7 +51,7 @@ export default {
          score:"3",
          tipster:"computer",
          estimatedTime:"10",
-         date: ""
+         date: "2018-12-24 23:03:43"
       }
 
     ]
