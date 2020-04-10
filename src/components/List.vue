@@ -139,9 +139,23 @@ export default {
     methods:{
         sortByThis(sortThis){
             this.sortBy = sortThis;
+            if(sortThis == "activity"){
+                this.activityActive = true;
+            } else if(sortThis == "category"){
+                this.categoryActive = true;
+            } else if(sortThis == "tipster"){
+                this.tipsterActive = true;
+            } else if(sortThis == "estimatedTime"){
+                this.estimatedTimeActive = true;
+            } else if(sortThis == "score"){
+                this.scoreActive = true;
+            }
         },
         emitDelete(key){
             this.$emit('emitDelete', key);
+        },
+        setButtonStatus(){
+            
         }
 
     },
