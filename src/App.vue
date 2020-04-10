@@ -1,8 +1,10 @@
 <template>
   <div id="app">
+    <button><a href="#anchor">Add activity</a></button>
     <Home />
     <List :activityList="activityList"/>
     <Form :activityList="activityList"/>
+    <a id="anchor"></a>
   </div>
 </template>
 
@@ -53,7 +55,6 @@ export default {
          estimatedTime:"10",
          date: "2018-12-24 23:03:43"
       }
-
     ]
   })
 
@@ -65,5 +66,10 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a{
+  text-decoration: none;
+  cursor: default;
 }
 </style>

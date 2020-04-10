@@ -118,16 +118,7 @@ export default {
                 tipster: this.name,
                 estimatedTime: this.estimatedTime,
                 date: this.todaysDate
-            });
-
-/*             this.name = "  ";
-            this.activity = "  ";
-            this.estimatedTime == 0;
-            this.selected = "  "; */
-            
-
-
-            
+            });  
         },
 
         findDuplicate(activity){
