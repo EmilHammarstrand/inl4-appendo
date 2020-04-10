@@ -15,7 +15,8 @@
                 <p> <span>Category:</span>  {{activity.category}}</p>
                 <p> <span>Score: </span> {{activity.score}}</p>
                 <p> <span>Tipster:</span>  {{activity.tipster}}</p>
-                <p> <span>Estimated time:</span>  {{activity.estimatedTime}}</p>
+                <p> <span>Estimated time:</span>  {{activity.estimatedTime}} min</p>
+                <p class="created"><span class="created">Created: </span>{{activity.date}}</p>
             </div>
 
             <div>
@@ -39,8 +40,6 @@ export default {
 
     }),
     computed:{
-
-        //glöm inte att lägga till en funktion som ändrar datan för knapparna till true/false
 
         activityIsActive(){
             return this.activityActive ? "activeClass" : "";
@@ -139,22 +138,41 @@ export default {
             this.sortBy = sortThis;
             if(sortThis == "activity"){
                 this.activityActive = true;
+                this.categoryActive = false;
+                this.tipsterActive = false;
+                this.scoreActive = false;
+                this.estimatedTimeActive = false;
             } else if(sortThis == "category"){
+                this.activityActive = false;
                 this.categoryActive = true;
+                this.tipsterActive = false;
+                this.scoreActive = false;
+                this.estimatedTimeActive = false;
             } else if(sortThis == "tipster"){
+                this.activityActive = false;
+                this.categoryActive = false;
                 this.tipsterActive = true;
+                this.scoreActive = false;
+                this.estimatedTimeActive = false;
             } else if(sortThis == "estimatedTime"){
+                this.activityActive = false;
+                this.categoryActive = false;
+                this.tipsterActive = false;
+                this.scoreActive = false;
                 this.estimatedTimeActive = true;
             } else if(sortThis == "score"){
+                this.activityActive = false;
+                this.categoryActive = false;
+                this.tipsterActive = false;
                 this.scoreActive = true;
+                this.estimatedTimeActive = false;
             }
         },
         emitDelete(key){
             this.$emit('emitDelete', key);
         },
-        setButtonStatus(){
-            
-        }
+        // setButtonStatus(buttonName){
+        // }
 
     },
 
@@ -196,6 +214,10 @@ export default {
     p{
        margin: .3rem .3rem .3rem .5rem;
        
+    }
+    p.created,
+    span.created{
+        font-size: .7rem;
     }
     .sortButtons > button{
         background-color:#96BB53;
