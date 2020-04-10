@@ -26,10 +26,10 @@
             <span v-if="!timeIsValid && timeIsTouched" class="error"> {{ timeErrorMessage }} </span>
         </div>
         <div class="form-group">
-            <button :disabled="!isCompleted || !nameIsValid || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity);"> Post</button>
+            <button :disabled="!isCompleted || !nameIsValid || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity); postActivityBtn();"> Post</button>
+            <span v-if="duplicate" class="error"> {{ duplicateErrorMessage }} </span>
         </div>
-         
-        <span v-if="formResult"> Hello {{name}}, you choose {{activity}} in category {{selected}}, estimated time {{estimatedTime}} minutes, published: {{todaysDate}} </span>
+        
     </div> 
 </template>
 
@@ -40,12 +40,12 @@ export default {
         activity: "",
         selected: "",
         estimatedTime: "",
-        date: "",
         nameIsTouched: false,
         activityIsTouched: false,
         categoryIsTouched: false,
         timeIsTouched: false,
-        formResult: false
+        formResult: false,
+        duplicate: false
     }),
 
     props: {
@@ -55,6 +55,9 @@ export default {
     computed: {
         nameErrorMessage(){
             return "Please enter at least two characters."
+        },
+        duplicateErrorMessage(){
+            return "You cant post duplicates, try writing another activity."
         },
         nameIsValid() {
             return this.name.length >= 2;
@@ -71,7 +74,7 @@ export default {
 			return this.categoryIsValid ? 'valid' : 'invalid';
         },
         activityErrorMessage(){
-            return "Must be between 2-10 characters"
+            return "Must be between 2-10 characters."
         },
         activityIsValid() {
             let asd = this.activity.length <= 10 && this.activity.length >= 2;
@@ -89,10 +92,10 @@ export default {
          return todaysDate;
         },
         categoryErrorMessage(){
-            return "You must choose a category";
+            return "You must choose a category.";
         },
         timeErrorMessage(){
-            return "Must be between 3-15 minutes";
+            return "Must be between 3-15 minutes.";
         },
         timeIsValid() {
             let estTime1 = this.estimatedTime >=3 && this.estimatedTime <= 15;
@@ -106,16 +109,27 @@ export default {
 
     methods: {
         postActivityBtn(){
-            
+
+
+            this.activityList.push({
+                activity: this.activity,
+                category: this.selected,
+                score: "5",
+                tipster: this.name,
+                estimatedTime: this.estimatedTime,
+                date: this.todaysDate
+            });  
         },
 
         findDuplicate(activity){
             if(this.activityList.some(value => value.activity == activity)){
-               /*  return ""; */
-                console.log("duplicates")
-            }else{
-                /* return "Duplicates" */
-                console.log("no duplicatess")
+                this.duplicate = true;
+                this.duplicateErrorMessage;
+                this.activityList.reduce((uniqe, item) =>{
+                   uniqe.includes(item) ? uniqe : [...uniqe, item], [] })
+            }else {
+                this.duplicate = false;
+                this.duplicateErrorMessage = "";
             }
         }
     }
@@ -129,9 +143,6 @@ export default {
 <style>
     input.valid { border-color: green; }
     input.invalid { border-color: red; }
-
-    textarea.valid { border-color: green; }
-    textarea.invalid { border-color: red; }
 
     select.valid { border-color: red; }
     select.invalid { border-color: green; }

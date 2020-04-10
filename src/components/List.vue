@@ -1,8 +1,6 @@
 <template>
     <div class="root">
 
-        <button>Add activity</button>
-
         <div class="sortButtons">
             <button :class="activityIsActive" @click="sortByThis('activity')">Activity</button>
             <button :class="categoryIsActive" @click="sortByThis('category')">Category</button>
