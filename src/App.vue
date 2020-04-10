@@ -2,7 +2,8 @@
   <div id="app">
     <button><a href="#anchor">Add activity</a></button>
     <Home />
-    <List @emitDelete="deleteItem($event)" 
+    <List @emitDelete="deleteItem($event)"
+    @rateActivity="rateActivity($event)" 
     :activityList="activityList"/>
     <Form :activityList="activityList"/>
     <a id="anchor"></a>
@@ -62,7 +63,18 @@ export default {
     deleteItem(key){
        this.activityList = this.activityList.filter( item => item.activity != key)
          
+    },
+    rateActivity(keys){
+      this.activityList = this.activityList.filter((item) => {
+        if( item.activity == keys.key ){
+          item.score = keys.score;
+          return item;
+        } else{
+          return item;
+        }
+      });
     }
+
   }
   
 
@@ -70,10 +82,18 @@ export default {
 </script>
 
 <style>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+button{
+  cursor: pointer;
 }
 
 a{

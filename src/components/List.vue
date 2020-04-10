@@ -13,14 +13,23 @@
             <div>            
                 <h3>{{activity.activity}}</h3> 
                 <p> <span>Category:</span>  {{activity.category}}</p>
-                <p> <span>Score: </span> {{activity.score}}</p>
                 <p> <span>Tipster:</span>  {{activity.tipster}}</p>
                 <p> <span>Estimated time:</span>  {{activity.estimatedTime}} min</p>
                 <p class="created"><span class="created">Created: </span>{{activity.date}}</p>
             </div>
 
-            <div>
+            <div class="optionDiv">
                 <img @click="emitDelete(activity.activity)" src="../assets/garbage.png" alt="delete" class="delete">
+                <label for="score">Rate activity: </label>
+                <select @change="updateUserScore" name="score" id="submitScore">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <button @click="rateActivity(activity.activity)">Submit</button>
+                <p class="score"> <span class="score">Score: </span> {{activity.score}}</p>
             </div>
         </div>
         
@@ -36,7 +45,8 @@ export default {
         categoryActive: false,
         tipsterActive: false,
         estimatedTimeActive: false,
-        scoreActive: false
+        scoreActive: false,
+        userScore: 3
 
     }),
     computed:{
@@ -55,7 +65,7 @@ export default {
         },
         scoreIsActive(){
             return this.scoreActive ? "activeClass" : "";
-        },//slut active :P :P :P
+        },
       
 
         sortList(){
@@ -170,6 +180,12 @@ export default {
         },
         emitDelete(key){
             this.$emit('emitDelete', key);
+        },
+        updateUserScore(){
+            this.userScore = event.target.value;
+        },
+        rateActivity(key){
+            this.$emit('rateActivity', {'score':this.userScore, 'key': key});
         }
 
     },
@@ -198,7 +214,7 @@ export default {
         border: 2px solid red;
     }
     div.activityCard div:last-child{
-        /* border: 2px solid grey; */
+        border: 2px solid grey;
     }
     span{
         font-weight: 600;
@@ -217,6 +233,33 @@ export default {
     span.created{
         font-size: .7rem;
     }
+    .optionDiv{
+        display: flex;
+        flex-direction: column;
+        width: 11rem;
+        padding: .2rem 2rem .2rem;
+        align-items: center;
+        justify-content: space-evenly;
+
+    }
+    p.score,
+    span.score{
+        padding-right: .6rem;
+    }
+    select{
+        margin-top: .3rem;
+    }
+    .optionDiv button{
+        width: 4rem;
+        padding: .2rem;
+        margin-top: .3rem;
+    }
+    img.delete{
+        object-fit: scale-down;
+        height: 3rem;
+        padding: .5rem;
+        cursor: pointer;
+    }
     .sortButtons > button{
         background-color:#96BB53;
         padding:0.5em;
@@ -224,11 +267,7 @@ export default {
         border-radius:0.5em;
        
     }
-    img.delete{
-        object-fit: scale-down;
-        height: 1.7rem;
-        padding: .6rem;
-    }
+
     .sortButtons > .activeClass{
         background-color: #EFC748;
     }
