@@ -170,9 +170,7 @@ export default {
         },
         emitDelete(key){
             this.$emit('emitDelete', key);
-        },
-        // setButtonStatus(buttonName){
-        // }
+        }
 
     },
 
