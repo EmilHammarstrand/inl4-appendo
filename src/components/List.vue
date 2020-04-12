@@ -1,22 +1,36 @@
 <template>
     <div class="root">
 
-        <button>Add activity</button>
-
         <div class="sortButtons">
-            <button @click="sortByThis('activity')">Activity</button>
-            <button @click="sortByThis('category')">Category</button>
-            <button @click="sortByThis('tipster')">Tipster</button>
-            <button @click="sortByThis('estimatedTime')">Time</button>
-            <button @click="sortByThis('score')">Score</button>
+            <button :class="activityIsActive" @click="sortByThis('activity')">Activity</button>
+            <button :class="categoryIsActive" @click="sortByThis('category')">Category</button>
+            <button :class="tipsterIsActive" @click="sortByThis('tipster')">Tipster</button>
+            <button :class="estimatedTimeIsActive" @click="sortByThis('estimatedTime')">Time</button>
+            <button :class="scoreIsActive" @click="sortByThis('score')">Score</button>
         </div>
         
         <div v-for="activity in sortList" class="activityCard" :key="activity.activity">
-            <h3>{{activity.activity}}</h3> 
-            <p> <span>Category:</span>  {{activity.category}}</p>
-            <p> <span>Score: </span> {{activity.score}}</p>
-            <p> <span>Tipster:</span>  {{activity.tipster}}</p>
-            <p> <span>Estimated time:</span>  {{activity.estimatedTime}}</p>
+            <div>            
+                <h3>{{activity.activity}}</h3> 
+                <p> <span>Category:</span>  {{activity.category}}</p>
+                <p> <span>Tipster:</span>  {{activity.tipster}}</p>
+                <p> <span>Estimated time:</span>  {{activity.estimatedTime}} min</p>
+                <p class="created"><span class="created">Created: </span>{{activity.date}}</p>
+            </div>
+
+            <div class="optionDiv">
+                <img @click="emitDelete(activity.activity)" src="../assets/garbage.png" alt="delete" class="delete">
+                <label for="score">Rate activity: </label>
+                <select @change="updateUserScore" name="score" id="submitScore">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <button @click="rateActivity(activity.activity)">Submit</button>
+                <p class="score"> <span class="score">Score: </span> {{activity.score}}</p>
+            </div>
         </div>
         
     </div>
@@ -26,10 +40,33 @@
 export default {
     data: () => ({
 
-        sortBy: "default"
+        sortBy: "default",
+        activityActive: false,
+        categoryActive: false,
+        tipsterActive: false,
+        estimatedTimeActive: false,
+        scoreActive: false,
+        userScore: 3
 
     }),
     computed:{
+
+        activityIsActive(){
+            return this.activityActive ? "activeClass" : "";
+        },
+        categoryIsActive(){
+            return this.categoryActive ? "activeClass" : "";
+        },
+        tipsterIsActive(){
+            return this.tipsterActive ? "activeClass" : "";
+        },
+        estimatedTimeIsActive(){
+            return this.estimatedTimeActive ? "activeClass" : "";
+        },
+        scoreIsActive(){
+            return this.scoreActive ? "activeClass" : "";
+        },
+      
 
         sortList(){
 
@@ -73,42 +110,83 @@ export default {
             }
             if(this.sortBy == "estimatedTime"){
                 copy.sort( (a,b) => {
-                if(a.estimatedTime.toLowerCase() < b.estimatedTime.toLowerCase()){
-                    return -1;
-                } else if(a.estimatedTime.toLowerCase() > b.estimatedTime.toLowerCase()){
-                    return 1;
-                } else {
-                    return 0;
-                }
-            })
+                    if(a.estimatedTime.toLowerCase() < b.estimatedTime.toLowerCase()){
+                        return -1;
+                    } else if(a.estimatedTime.toLowerCase() > b.estimatedTime.toLowerCase()){
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                })
             return copy
             }
             if(this.sortBy == "score"){
                 copy.sort( (a,b) => {
-                if(a.score.toLowerCase() < b.score.toLowerCase()){
-                    return -1;
-                } else if(a.score.toLowerCase() > b.score.toLowerCase()){
-                    return 1;
-                } else {
-                    return 0;
-                }
-            })
+                    if(a.score.toLowerCase() < b.score.toLowerCase()){
+                        return -1;
+                    } else if(a.score.toLowerCase() > b.score.toLowerCase()){
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                })
             return copy
             }
 
             return copy
+        }//slut sortlist
             
             
 
            
-        },
+        
+        
         
     },//slut computed
     methods:{
         sortByThis(sortThis){
             this.sortBy = sortThis;
-    
+            if(sortThis == "activity"){
+                this.activityActive = true;
+                this.categoryActive = false;
+                this.tipsterActive = false;
+                this.scoreActive = false;
+                this.estimatedTimeActive = false;
+            } else if(sortThis == "category"){
+                this.activityActive = false;
+                this.categoryActive = true;
+                this.tipsterActive = false;
+                this.scoreActive = false;
+                this.estimatedTimeActive = false;
+            } else if(sortThis == "tipster"){
+                this.activityActive = false;
+                this.categoryActive = false;
+                this.tipsterActive = true;
+                this.scoreActive = false;
+                this.estimatedTimeActive = false;
+            } else if(sortThis == "estimatedTime"){
+                this.activityActive = false;
+                this.categoryActive = false;
+                this.tipsterActive = false;
+                this.scoreActive = false;
+                this.estimatedTimeActive = true;
+            } else if(sortThis == "score"){
+                this.activityActive = false;
+                this.categoryActive = false;
+                this.tipsterActive = false;
+                this.scoreActive = true;
+                this.estimatedTimeActive = false;
+            }
         },
+        emitDelete(key){
+            this.$emit('emitDelete', key);
+        },
+        updateUserScore(){
+            this.userScore = event.target.value;
+        },
+        rateActivity(key){
+            this.$emit('rateActivity', {'score':this.userScore, 'key': key});
+        }
 
     },
 
@@ -128,8 +206,15 @@ export default {
         margin-bottom: .5rem;
         background-color:#465F6F;
         color:white;
-   
+        display: flex;
+        justify-content: space-between;
 
+    }
+    div.activityCard div:first-child{
+        border: 2px solid red;
+    }
+    div.activityCard div:last-child{
+        border: 2px solid grey;
     }
     span{
         font-weight: 600;
@@ -144,6 +229,37 @@ export default {
        margin: .3rem .3rem .3rem .5rem;
        
     }
+    p.created,
+    span.created{
+        font-size: .7rem;
+    }
+    .optionDiv{
+        display: flex;
+        flex-direction: column;
+        width: 11rem;
+        padding: .2rem 2rem .2rem;
+        align-items: center;
+        justify-content: space-evenly;
+
+    }
+    p.score,
+    span.score{
+        padding-right: .6rem;
+    }
+    select{
+        margin-top: .3rem;
+    }
+    .optionDiv button{
+        width: 4rem;
+        padding: .2rem;
+        margin-top: .3rem;
+    }
+    img.delete{
+        object-fit: scale-down;
+        height: 3rem;
+        padding: .5rem;
+        cursor: pointer;
+    }
     .sortButtons > button{
         background-color:#96BB53;
         padding:0.5em;
@@ -151,6 +267,11 @@ export default {
         border-radius:0.5em;
        
     }
+
+    .sortButtons > .activeClass{
+        background-color: #EFC748;
+    }
+
 
 
 </style>
