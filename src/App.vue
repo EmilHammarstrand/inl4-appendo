@@ -16,9 +16,9 @@
     :activityList="activityList"/>
     </div>
 
-  <div class = "form-div">
+  <div class = "form-div" v-if="showform">
 
-    <Form v-if="showform" :activityList="activityList"/>
+    <Form :activityList="activityList"/>
 
   </div>
     <!--<a id="anchor"></a>-->
@@ -29,11 +29,13 @@
 
 <script>
 
+/*
 import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+*/
 
 import Form from "./components/Form"
 import Home from "./components/Home"
@@ -163,7 +165,7 @@ float: right;
 }
 .form-div {
 text-align: center;
-border: 1px solid red;
+
 }
 
 #app {
