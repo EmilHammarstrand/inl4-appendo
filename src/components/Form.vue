@@ -143,7 +143,7 @@ export default {
             this.activityList.push({
                 activity: this.activity,
                 category: this.selected,
-                score: "5",
+                score: "3",
                 tipster: "Anonym",
                 estimatedTime: this.estimatedTime,
                 date: this.todaysDate
@@ -151,7 +151,7 @@ export default {
                  this.activityList.push({
                 activity: this.activity,
                 category: this.selected,
-                score: "5",
+                score: "3",
                 tipster: this.name,
                 estimatedTime: this.estimatedTime,
                 date: this.todaysDate
