@@ -9,7 +9,11 @@
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
+<<<<<<< HEAD
     "bootstrap-vue": "^2.10.1",
+=======
+    "bootstrap-vue": "^2.11.0",
+>>>>>>> e876e987afa0484d3f0186d11f354649e1ab30fa
     "core-js": "^3.6.4",
     "vue": "^2.6.11"
   },

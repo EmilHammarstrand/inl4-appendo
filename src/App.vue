@@ -1,12 +1,22 @@
 <template>
   <div id="app">
-    <Form />
+    <button><a href="#anchor">Add activity</a></button>
     <Home />
-    <List />
+    <List @emitDelete="deleteItem($event)"
+    @rateActivity="rateActivity($event)" 
+    :activityList="activityList"/>
+    <Form :activityList="activityList"/>
+    <a id="anchor"></a>
   </div>
 </template>
 
 <script>
+
+import Vue from 'vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 
 import Form from "./components/Form"
 import Home from "./components/Home"
@@ -25,32 +35,75 @@ export default {
         activity: "Take a walk around the house",
         category: "exercise",
         score: "3",
-        source: "google"
+        tipster: "google",
+        estimatedTime: "5",
+        date: "2020-02-09 02:09:43"
       },
       {
         activity: "Grab a snack",
         category: "food",
         score: "3",
-        source: "Fanny"
+        tipster: "Fanny",
+        estimatedTime: "7",
+        date: "2019-07-21 18:02:22"
       },
       {
          activity:"powernap",
          category:"relax",
          score:"3",
-         source:"computer"
+         tipster:"computer",
+         estimatedTime:"10",
+         date: "2020-04-10 12:11:02"
+      },
+      {
+         activity:"sleep",
+         category:"relax",
+         score:"3",
+         tipster:"computer",
+         estimatedTime:"10",
+         date: "2018-12-24 23:03:43"
       }
-
     ]
+  }),
+  methods: {
+    deleteItem(key){
+       this.activityList = this.activityList.filter( item => item.activity != key)
+         
+    },
+    rateActivity(keys){
+      this.activityList = this.activityList.filter((item) => {
+        if( item.activity == keys.key ){
+          item.score = keys.score;
+          return item;
+        } else{
+          return item;
+        }
+      });
+    }
 
-  })
+  }
+  
 
 }
 </script>
 
 <style>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+button{
+  cursor: pointer;
+}
+
+a{
+  text-decoration: none;
+  cursor: default;
 }
 </style>

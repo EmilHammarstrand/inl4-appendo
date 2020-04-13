@@ -1,29 +1,42 @@
 <template>
     <div class="root">
+
         <div class="form-group">
-            <label for="name">Name: </label>
-            <input type="text" name="name" placeholder="Enter your name" v-model="name" :class="nameClass" @blur.once="nameIsTouched = true" >
-            <span v-if="nameIsTouched && !nameIsValid" class="error"> {{ nameErrorMessage }} </span>
-        </div>
-        <div class="form-group">
-            <label for="activity">Activity suggestion: </label>
-            <input type="text" placeholder="Enter a short suggestion" name="activity" v-model="activity" :class="activityClass" @blur.once="activityIsTouched = true" >
+            <label for="activity">  Activity: </label> <br />
+            <input type="text" placeholder="Enter a short suggestion..." name="activity" v-model="activity" :class="activityClass" @blur.once="activityIsTouched = true" >
             <span v-if="!activityIsValid && activityIsTouched" class="error"> {{ activityErrorMessage }} </span>
         </div>
+
         <div class="form-group">
-             <select v-model="selected">
-                <option>Outside</option>
+            <label for="name">Tipser: <span id="opt">(opt.)</span></label> <br />
+            <input type="text" name="name" placeholder="Enter your name..." v-model="name">
+            <!-- <span v-if="nameIsTouched && !nameIsValid" class="error"> {{ nameErrorMessage }} </span> --> 
+        </div>
+
+    
+        <div class="form-group">
+            <label for="dropdown">  Category: </label> <br />
+             <select name="dropdown" v-model="selected" :class="categoryClass" @blur.once="categoryIsTouched = true">
+                <option>Relax</option>
                 <option>Food</option>
-                <option>Training</option>
+                <option>Exercise</option>
                 <option>Thinking</option>
              </select>
-         </div>
-        <div class="form-group">
-            <button @click="postActivityBtn"> Post </button>
+             <span v-if="categoryIsValid && categoryIsTouched" class="error"> {{ categoryErrorMessage }} </span>
         </div>
-         
-        <span> {{name}} {{activity}} {{selected}}</span>
-    </div>
+
+        <div class="form-group">
+            <label for="estimatedTime">  Estimated minutes: </label> <br />
+            <input class="estTime" name="estimatedTime" type="number" v-model="estimatedTime" min="3" max="15" :class="timeClass" @blur.once="timeIsTouched = true" >
+            <span v-if="!timeIsValid && timeIsTouched" class="error"> {{ timeErrorMessage }} </span>
+        </div>
+
+        <div class="form-group">
+            <button :disabled="!isCompleted || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity); postActivityBtn(); "> Post</button>
+            <span v-if="duplicate" class="error"> {{ duplicateErrorMessage }} </span>
+        </div> 
+        
+    </div> 
 </template>
 
 <script>
@@ -31,37 +44,130 @@ export default {
     data: () => ({
         name: "",
         activity: "",
-        nameIsTouched: false,
-        activityIsTouched: false
+        selected: "",
+        estimatedTime: "",
+        /* nameIsTouched: false, */
+        activityIsTouched: false,
+        categoryIsTouched: false,
+        timeIsTouched: false,
+        formResult: false,
+        duplicate: false
     }),
 
+    props: {
+        activityList: Array
+    },
+
     computed: {
-        nameErrorMessage(){
+        /* nameErrorMessage(){
             return "Please enter at least two characters."
+        }, */
+        duplicateErrorMessage(){
+            return "You cant post duplicates, try writing another activity."
         },
-        nameIsValid() {
+        /* nameIsValid() {
             return this.name.length >= 2;
-        },
-        nameClass() {
+        } */
+        /* nameClass() {
 			if( !this.nameIsTouched ) return '';
 			return this.nameIsValid ? 'valid' : 'invalid';
+        }, */
+        categoryIsValid() {
+            return this.selected == 0;
+        },
+        categoryClass() {
+			if( !this.categoryIsTouched ) return '';
+			return this.categoryIsValid ? 'valid' : 'invalid';
         },
         activityErrorMessage(){
-            return "Max characters is 10"
+            return "Must be between 2-20 characters."
         },
         activityIsValid() {
-            return this.activity.length <= 10;
+            let asd = this.activity.length <= 20 && this.activity.length >= 2;
+            return asd;
         },
         activityClass() {
 			if( !this.activityIsTouched ) return '';
 			return this.activityIsValid ? 'valid' : 'invalid';
-        }
+        },
+        isCompleted(){
+            return this.activity && this.selected && this.estimatedTime;
+        },
+        todaysDate(){
+         let todaysDate = new Date().toLocaleString();
+         return todaysDate;
+        },
+        categoryErrorMessage(){
+            return "You must choose a category.";
+        },
+        timeErrorMessage(){
+            return "Must be between 3-15 minutes.";
+        },
+        timeIsValid() {
+            let estTime1 = this.estimatedTime >=3 && this.estimatedTime <= 15;
+            return estTime1;
+        },
+        timeClass() {
+			if( !this.timeIsTouched ) return '';
+			return this.timeIsValid ? 'valid' : 'invalid';
+        },
     },
 
     methods: {
+
+        /* tipsterAnonym(){
+            if(this.name == ""){
+                this.activityList.push({
+                    activity: this.activity,
+                category: this.selected,
+                score: "5",
+                tipster: "Anonymous",
+                estimatedTime: this.estimatedTime,
+                date: this.todaysDate
+                })
+            }else{
+                this.activityList.push({
+                activity: this.activity,
+                category: this.selected,
+                score: "5",
+                tipster: this.name,
+                estimatedTime: this.estimatedTime,
+                date: this.todaysDate
+            });
+            }
+        }, */
+
         postActivityBtn(){
-            this.name;
-            this.activity;
+            
+            if(this.name == ""){
+            this.activityList.push({
+                activity: this.activity,
+                category: this.selected,
+                score: "3",
+                tipster: "Anonym",
+                estimatedTime: this.estimatedTime,
+                date: this.todaysDate
+            })} else{
+                 this.activityList.push({
+                activity: this.activity,
+                category: this.selected,
+                score: "3",
+                tipster: this.name,
+                estimatedTime: this.estimatedTime,
+                date: this.todaysDate
+            })
+            } 
+        },
+
+        findDuplicate(activity){
+            if(this.activityList.some(value => value.activity == activity)){
+                this.duplicate = true;
+                this.duplicateErrorMessage;
+                this.activityList.reduce((uniqe, item) =>{
+                   uniqe.activityList(item) ? uniqe : [...uniqe, item], [] })
+            }else {
+                this.duplicate = false;
+            }
         }
     }
 
@@ -71,11 +177,41 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
     input.valid { border-color: green; }
     input.invalid { border-color: red; }
 
-    textarea.valid { border-color: green; }
-    textarea.invalid { border-color: red; }
-</style>
+    select.valid { border-color: red; }
+    select.invalid { border-color: green; }
 
+    .error{
+        color: red;
+    }
+    .form-group{
+        margin: 1em;
+
+    }
+    .estTime{
+        width: 2.3em;
+    }
+
+    label, input, button, option{
+        font-family: Quicksand;
+    }
+    label{
+        color: white;
+    }
+    input{
+        color: black;
+    }
+
+    body{
+        background-color: #2F4858;
+    }
+
+    #opt {
+        opacity: 50%;
+        font-size: 75%;
+    }
+
+</style>

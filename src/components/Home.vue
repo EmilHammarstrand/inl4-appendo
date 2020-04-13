@@ -1,23 +1,17 @@
 <template>
 
-  <div class="home">
+    <div class="home">
+
+          <div class="background-image">
+                <h1>Glued to your computer during break? AppenDo helps you break FREE</h1>
+                <button class="btn">Get started</button>
+          </div>
 
 
-
-
-    <div class="container">
-
-        <img src="./images/nature-pic.jpg" alt="galaxy" style="width:100%">
-            <h1>Glued to your computer during break? AppenDo helps you break FREE</h1>
-            <button class="btn">Button</button>
     </div>
 
 
-
-  </div>
-
-
-
+<!--example of the list -->
 
 
 </template>
@@ -41,16 +35,29 @@ export default {
 <style scoped>
 
 
+/*
 .container {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  height: 100%;
+
+
+}
+*/
+
+.home {
+
+  height: 100%;
+  width: 100%;
 }
 
-.container img {
-  width: 100%;
-  height: auto;
+.background-image {
+
+
+  background-size: cover;
+  background-image: url(./images/nature-pic.jpg);
 }
+
 
 .container .btn {
   position: absolute;
