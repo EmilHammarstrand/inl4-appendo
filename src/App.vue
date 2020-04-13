@@ -1,14 +1,31 @@
 <template>
+
   <div id="app">
-    <button><a href="#anchor">Add activity</a></button>
-    <Home />
-    <List @emitDelete="deleteItem($event)"
-    @rateActivity="rateActivity($event)" 
+
+    <div class = "intro-text">
+      <h1>AppenDo</h1>
+      <p>Glued to the computer during break? AppenDo helps you to break FREE</p>
+      <button class = "btn btn-lg btn-primary getstarted" @click="getStarted()" v-if="!showlistapp">Get Started</button>
+    </div>
+
+    <button class = "btn btn-lg btn-primary add-activity" @click="form()" v-if="showlistapp">Add activity</button>
+    <Home v-if="false" />
+    <div>
+      <List v-if="showlistapp" @emitDelete="deleteItem($event)"
+    @rateActivity="rateActivity($event)"
     :activityList="activityList"/>
-    <Form :activityList="activityList"/>
-    <a id="anchor"></a>
+    </div>
+
+  <div class = "form-div">
+
+    <Form v-if="showform" :activityList="activityList"/>
+
+  </div>
+    <!--<a id="anchor"></a>-->
   </div>
 </template>
+
+
 
 <script>
 
@@ -28,8 +45,11 @@ export default {
     Home,
     List
   },
-  
+
   data: () => ({
+
+    showform: false,
+    showlistapp: false,
     activityList: [
       {
         activity: "Take a walk around the house",
@@ -68,7 +88,7 @@ export default {
   methods: {
     deleteItem(key){
        this.activityList = this.activityList.filter( item => item.activity != key)
-         
+
     },
     rateActivity(keys){
       this.activityList = this.activityList.filter((item) => {
@@ -79,25 +99,89 @@ export default {
           return item;
         }
       });
+    },
+    getStarted() {
+      this.showlistapp = true;
+      this.showform = false;
+
+
+  },
+    form() {
+      this.showlistapp = false;
+      this.showform = true;
+
     }
 
-  }
-  
+  },
+
+
+
 
 }
 </script>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+
+body {
+
+  background-image: url('./components/images/nature-pic.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background: no-repeat;
+
+}
+
+.getstarted {
+
+  margin-top: 150px;
+}
+
+.add-activity {
+
+float: right;
+}
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+
 }
+
+.intro-text {
+
+  color: white;
+  text-align: center;
+  padding: 30px;
+  margin: 0px 20px 20px 20px;
+
+}
+.form-div {
+text-align: center;
+border: 1px solid red;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Quicksand', sans-serif;
+  letter-spacing: 0.5px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  background-image: url('./components/images/nature-pic.jpg');
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+
+
 }
+
 button{
   cursor: pointer;
 }
