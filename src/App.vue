@@ -1,14 +1,27 @@
 <template>
 
   <div id="app">
-    <button class = "btn btn-lg btn-primary" @click="getStarted()">Get Started</button>
-    <button class = "btn btn-lg btn-primary" @click="form()" v-if="showlistapp">Add activity</button>
+
+    <div class = "intro-text">
+      <h1>AppenDo</h1>
+      <p>Glued to the computer during break? AppenDo helps you to break FREE</p>
+      <button class = "btn btn-lg btn-primary getstarted" @click="getStarted()" v-if="!showlistapp">Get Started</button>
+    </div>
+
+    <button class = "btn btn-lg btn-primary add-activity" @click="form()" v-if="showlistapp">Add activity</button>
     <Home v-if="false" />
-    <List v-if="showlistapp" @emitDelete="deleteItem($event)"
+    <div>
+      <List v-if="showlistapp" @emitDelete="deleteItem($event)"
     @rateActivity="rateActivity($event)"
     :activityList="activityList"/>
+    </div>
+
+  <div class = "form-div">
+
     <Form v-if="showform" :activityList="activityList"/>
-    <a id="anchor"></a>
+
+  </div>
+    <!--<a id="anchor"></a>-->
   </div>
 </template>
 
@@ -109,6 +122,8 @@ export default {
 
 <style>
 
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+
 body {
 
   background-image: url('./components/images/nature-pic.jpg');
@@ -117,6 +132,17 @@ body {
   background-size: cover;
   -o-background-size: cover;
   background: no-repeat;
+
+}
+
+.getstarted {
+
+  margin-top: 150px;
+}
+
+.add-activity {
+
+float: right;
 }
 
 *{
@@ -126,12 +152,25 @@ body {
 
 
 }
+
+.intro-text {
+
+  color: white;
+  text-align: center;
+  padding: 30px;
+  margin: 0px 20px 20px 20px;
+
+}
+.form-div {
+text-align: center;
+border: 1px solid red;
+}
+
 #app {
-   font-family: 'Orbitron', sans-serif, monospace;
-  letter-spacing: 2px;
+  font-family: 'Quicksand', sans-serif;
+  letter-spacing: 0.5px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   color: #2c3e50;
   background-image: url('./components/images/nature-pic.jpg');
   height: 100vh;
@@ -139,6 +178,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   z-index: -1;
+
 
 }
 
