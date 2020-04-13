@@ -4,8 +4,9 @@
         <div class="form-group">
             <label for="activity">  Activity: </label> <br />
             <input type="text" placeholder="Enter a short suggestion..." name="activity" v-model="activity" :class="activityClass" @blur.once="activityIsTouched = true" >
-            <span v-if="!activityIsValid && activityIsTouched" class="error"> {{ activityErrorMessage }} </span>
+        <span v-if="!activityIsValid && activityIsTouched" class="error"> {{ activityErrorMessage }} </span>
         </div>
+
 
         <div class="form-group">
             <label for="name">Tipser: <span id="opt">(opt.)</span></label> <br />
@@ -16,7 +17,7 @@
 
         <div class="form-group">
             <label for="dropdown">  Category: </label> <br />
-             <select name="dropdown" v-model="selected" :class="categoryClass" @blur.once="categoryIsTouched = true">
+             <select name="dropdown" class="categoryButton" v-model="selected" :class="categoryClass" @blur.once="categoryIsTouched = true">
                 <option>Relax</option>
                 <option>Food</option>
                 <option>Exercise</option>
@@ -32,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            <button :disabled="!isCompleted || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity); postActivityBtn(); "> Post</button>
+            <button class = "btn btn-warning btn-md" :disabled="!isCompleted || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity); postActivityBtn(); "> Save</button>
             <span v-if="duplicate" class="error"> {{ duplicateErrorMessage }} </span>
         </div>
 
@@ -193,13 +194,15 @@ export default {
 
     .error{
         color: red;
+        display:block;
     }
     .form-group{
         margin: 1em;
 
     }
     .estTime{
-        width: 2.3em;
+        width: 174px;
+
     }
 
     label, input, button, option{
@@ -210,6 +213,10 @@ export default {
     }
     input{
         color: black;
+    }
+    .categoryButton {
+        width: 174px;
+
     }
 
     body{
