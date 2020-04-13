@@ -4,9 +4,11 @@
 
           <div class="background-image">
                 <h1>Glued to your computer during break? AppenDo helps you break FREE</h1>
-                <button class="btn">Get started</button>
+                <button class="btn btn-primary">Get started</button>
+
           </div>
 
+    <b-button variant="info">......</b-button>
 
     </div>
 
@@ -20,11 +22,13 @@
 
 <script>
 
-import Vue from 'vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import Vue from 'vue';
+import { BootstrapVue, IconsPlugin  } from 'bootstrap-vue';
+import { ButtonGroupPlugin } from 'bootstrap-vue';
 
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
+Vue.use(ButtonGroupPlugin);
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 
 export default {
     name: 'Home'
@@ -33,31 +37,6 @@ export default {
 </script>
 
 <style scoped>
-
-
-/*
-.container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-
-
-}
-*/
-
-.home {
-
-  height: 100%;
-  width: 100%;
-}
-
-.background-image {
-
-
-  background-size: cover;
-  background-image: url(./images/nature-pic.jpg);
-}
-
 
 .container .btn {
   position: absolute;

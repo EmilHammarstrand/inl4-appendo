@@ -1,14 +1,18 @@
 <template>
+
   <div id="app">
-    <button><a href="#anchor">Add activity</a></button>
-    <Home />
-    <List @emitDelete="deleteItem($event)"
-    @rateActivity="rateActivity($event)" 
+    <button class = "btn btn-lg btn-primary" @click="getStarted()">Get Started</button>
+    <button class = "btn btn-lg btn-primary" @click="form()" v-if="showlistapp">Add activity</button>
+    <Home v-if="false" />
+    <List v-if="showlistapp" @emitDelete="deleteItem($event)"
+    @rateActivity="rateActivity($event)"
     :activityList="activityList"/>
-    <Form :activityList="activityList"/>
+    <Form v-if="showform" :activityList="activityList"/>
     <a id="anchor"></a>
   </div>
 </template>
+
+
 
 <script>
 
@@ -28,8 +32,11 @@ export default {
     Home,
     List
   },
-  
+
   data: () => ({
+
+    showform: false,
+    showlistapp: false,
     activityList: [
       {
         activity: "Take a walk around the house",
@@ -68,7 +75,7 @@ export default {
   methods: {
     deleteItem(key){
        this.activityList = this.activityList.filter( item => item.activity != key)
-         
+
     },
     rateActivity(keys){
       this.activityList = this.activityList.filter((item) => {
@@ -79,25 +86,62 @@ export default {
           return item;
         }
       });
+    },
+    getStarted() {
+      this.showlistapp = true;
+      this.showform = false;
+
+
+  },
+    form() {
+      this.showlistapp = false;
+      this.showform = true;
+
     }
 
-  }
-  
+  },
+
+
+
 
 }
 </script>
 
 <style>
+
+body {
+
+  background-image: url('./components/images/nature-pic.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background: no-repeat;
+}
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+   font-family: 'Orbitron', sans-serif, monospace;
+  letter-spacing: 2px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  color: #2c3e50;
+  background-image: url('./components/images/nature-pic.jpg');
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+
 }
+
 button{
   cursor: pointer;
 }

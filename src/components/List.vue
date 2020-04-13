@@ -9,10 +9,10 @@
             <button :class="estimatedTimeIsActive" @click="sortByThis('estimatedTime')">Time</button>
             <button :class="scoreIsActive" @click="sortByThis('score')">Score</button>
         </div>
-        
+
         <div v-for="activity in sortList" class="activityCard" :key="activity.activity">
-            <div>            
-                <h3>{{activity.activity}}</h3> 
+            <div>
+                <h3>{{activity.activity}}</h3>
                 <p> <span>Category:</span>  {{activity.category}}</p>
                 <p> <span>Tipster:</span>  {{activity.tipster}}</p>
                 <p> <span>Estimated time:</span>  {{activity.estimatedTime}} min</p>
@@ -33,11 +33,18 @@
                 <p class="score"> <span class="score">Score: </span> {{activity.score}}</p>
             </div>
         </div>
-        
+
     </div>
 </template>
 
 <script>
+
+import Vue from 'vue';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+
 export default {
     data: () => ({
 
@@ -70,7 +77,7 @@ export default {
         scoreIsActive(){
             return this.scoreActive ? "activeClass" : "";
         },
-      
+
 
         sortList(){
 
@@ -145,13 +152,13 @@ export default {
 
             return copy
         }//slut sortlist
-            
-            
 
-           
-        
-        
-        
+
+
+
+
+
+
     },//slut computed
     methods:{
         sortByThis(sortThis){
@@ -249,7 +256,7 @@ export default {
     }
     p{
        margin: .3rem .3rem .3rem .5rem;
-       
+
     }
     p.created,
     span.created{
@@ -287,7 +294,7 @@ export default {
         padding:0.5em;
         border:1px solid white;
         border-radius:0.5em;
-       
+
     }
 
     .sortButtons > .activeClass{
