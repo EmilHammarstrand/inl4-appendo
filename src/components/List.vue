@@ -2,6 +2,7 @@
     <div class="root">
 
         <div class="sortButtons">
+            <button :class="latestIsActive" @click="sortByThis('latest')">Latest</button>
             <button :class="activityIsActive" @click="sortByThis('activity')">Activity</button>
             <button :class="categoryIsActive" @click="sortByThis('category')">Category</button>
             <button :class="tipsterIsActive" @click="sortByThis('tipster')">Tipster</button>
@@ -24,7 +25,7 @@
                 <select @change="updateUserScore" name="score" id="submitScore">
                     <option value="1">1</option>
                     <option value="2">2</option>
-                    <option value="3">3</option>
+                    <option selected="selected" value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
@@ -40,7 +41,8 @@
 export default {
     data: () => ({
 
-        sortBy: "default",
+        sortBy: "latest",
+        latestActive: true,
         activityActive: false,
         categoryActive: false,
         tipsterActive: false,
@@ -50,7 +52,9 @@ export default {
 
     }),
     computed:{
-
+        latestIsActive(){
+            return this.latestActive ? "activeClass" : "";
+        },
         activityIsActive(){
             return this.activityActive ? "activeClass" : "";
         },
@@ -71,7 +75,19 @@ export default {
         sortList(){
 
             let copy = [...this.activityList];
-            
+
+            if(this.sortBy == "latest"){
+                copy.sort( (a,b) => {
+                    if(a.date < b.date){
+                        return -1;
+                    } else if(a.date > b.date){
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                })
+                return copy.reverse();
+            }
             if(this.sortBy == "activity"){
                 copy.sort( (a,b) => {
                     if(a.activity.toLowerCase() < b.activity.toLowerCase()){
@@ -110,21 +126,15 @@ export default {
             }
             if(this.sortBy == "estimatedTime"){
                 copy.sort( (a,b) => {
-                    if(a.estimatedTime.toLowerCase() < b.estimatedTime.toLowerCase()){
-                        return -1;
-                    } else if(a.estimatedTime.toLowerCase() > b.estimatedTime.toLowerCase()){
-                        return 1;
-                    } else {
-                        return 0;
-                    }
+                    return a - b;
                 })
             return copy
             }
             if(this.sortBy == "score"){
                 copy.sort( (a,b) => {
-                    if(a.score.toLowerCase() < b.score.toLowerCase()){
+                    if(a.score > b.score){
                         return -1;
-                    } else if(a.score.toLowerCase() > b.score.toLowerCase()){
+                    } else if(a.score < b.score){
                         return 1;
                     } else {
                         return 0;
@@ -147,34 +157,46 @@ export default {
         sortByThis(sortThis){
             this.sortBy = sortThis;
             if(sortThis == "activity"){
+                this.latestActive = false;
                 this.activityActive = true;
                 this.categoryActive = false;
                 this.tipsterActive = false;
                 this.scoreActive = false;
                 this.estimatedTimeActive = false;
             } else if(sortThis == "category"){
+                this.latestActive = false;
                 this.activityActive = false;
                 this.categoryActive = true;
                 this.tipsterActive = false;
                 this.scoreActive = false;
                 this.estimatedTimeActive = false;
             } else if(sortThis == "tipster"){
+                this.latestActive = false;
                 this.activityActive = false;
                 this.categoryActive = false;
                 this.tipsterActive = true;
                 this.scoreActive = false;
                 this.estimatedTimeActive = false;
             } else if(sortThis == "estimatedTime"){
+                this.latestActive = false;
                 this.activityActive = false;
                 this.categoryActive = false;
                 this.tipsterActive = false;
                 this.scoreActive = false;
                 this.estimatedTimeActive = true;
             } else if(sortThis == "score"){
+                this.latestActive = false;
                 this.activityActive = false;
                 this.categoryActive = false;
                 this.tipsterActive = false;
                 this.scoreActive = true;
+                this.estimatedTimeActive = false;
+            } else {
+                this.latestActive = true;
+                this.activityActive = false;
+                this.categoryActive = false;
+                this.tipsterActive = false;
+                this.scoreActive = false;
                 this.estimatedTimeActive = false;
             }
         },

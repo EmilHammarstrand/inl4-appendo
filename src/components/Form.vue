@@ -1,34 +1,40 @@
 <template>
     <div class="root">
+
         <div class="form-group">
-            <label for="name">Tipser: </label> <br />
-            <input type="text" name="name" placeholder="Enter your name..." v-model="name" :class="nameClass" @blur.once="nameIsTouched = true" >
-            <span v-if="nameIsTouched && !nameIsValid" class="error"> {{ nameErrorMessage }} </span>
-        </div>
-        <div class="form-group">
-            <label for="activity">Activity: </label> <br />
+            <label for="activity">  Activity: </label> <br />
             <input type="text" placeholder="Enter a short suggestion..." name="activity" v-model="activity" :class="activityClass" @blur.once="activityIsTouched = true" >
             <span v-if="!activityIsValid && activityIsTouched" class="error"> {{ activityErrorMessage }} </span>
         </div>
+
         <div class="form-group">
-            <label for="dropdown">Category: </label> <br />
+            <label for="name">Tipser: <span id="opt">(opt.)</span></label> <br />
+            <input type="text" name="name" placeholder="Enter your name..." v-model="name">
+            <!-- <span v-if="nameIsTouched && !nameIsValid" class="error"> {{ nameErrorMessage }} </span> --> 
+        </div>
+
+    
+        <div class="form-group">
+            <label for="dropdown">  Category: </label> <br />
              <select name="dropdown" v-model="selected" :class="categoryClass" @blur.once="categoryIsTouched = true">
-                <option>Outside</option>
+                <option>Relax</option>
                 <option>Food</option>
-                <option>Training</option>
+                <option>Exercise</option>
                 <option>Thinking</option>
              </select>
              <span v-if="categoryIsValid && categoryIsTouched" class="error"> {{ categoryErrorMessage }} </span>
         </div>
+
         <div class="form-group">
-            <label for="estimatedTime">Estimated minutes: </label> <br />
+            <label for="estimatedTime">  Estimated minutes: </label> <br />
             <input class="estTime" name="estimatedTime" type="number" v-model="estimatedTime" min="3" max="15" :class="timeClass" @blur.once="timeIsTouched = true" >
             <span v-if="!timeIsValid && timeIsTouched" class="error"> {{ timeErrorMessage }} </span>
         </div>
+
         <div class="form-group">
-            <button :disabled="!isCompleted || !nameIsValid || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity); postActivityBtn();"> Post</button>
+            <button :disabled="!isCompleted || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity); postActivityBtn(); "> Post</button>
             <span v-if="duplicate" class="error"> {{ duplicateErrorMessage }} </span>
-        </div>
+        </div> 
         
     </div> 
 </template>
@@ -40,7 +46,7 @@ export default {
         activity: "",
         selected: "",
         estimatedTime: "",
-        nameIsTouched: false,
+        /* nameIsTouched: false, */
         activityIsTouched: false,
         categoryIsTouched: false,
         timeIsTouched: false,
@@ -53,19 +59,19 @@ export default {
     },
 
     computed: {
-        nameErrorMessage(){
+        /* nameErrorMessage(){
             return "Please enter at least two characters."
-        },
+        }, */
         duplicateErrorMessage(){
             return "You cant post duplicates, try writing another activity."
         },
-        nameIsValid() {
+        /* nameIsValid() {
             return this.name.length >= 2;
-        },
-        nameClass() {
+        } */
+        /* nameClass() {
 			if( !this.nameIsTouched ) return '';
 			return this.nameIsValid ? 'valid' : 'invalid';
-        },
+        }, */
         categoryIsValid() {
             return this.selected == 0;
         },
@@ -74,10 +80,10 @@ export default {
 			return this.categoryIsValid ? 'valid' : 'invalid';
         },
         activityErrorMessage(){
-            return "Must be between 2-10 characters."
+            return "Must be between 2-20 characters."
         },
         activityIsValid() {
-            let asd = this.activity.length <= 10 && this.activity.length >= 2;
+            let asd = this.activity.length <= 20 && this.activity.length >= 2;
             return asd;
         },
         activityClass() {
@@ -85,7 +91,7 @@ export default {
 			return this.activityIsValid ? 'valid' : 'invalid';
         },
         isCompleted(){
-            return this.name && this.activity && this.selected && this.estimatedTime;
+            return this.activity && this.selected && this.estimatedTime;
         },
         todaysDate(){
          let todaysDate = new Date().toLocaleString();
@@ -108,17 +114,49 @@ export default {
     },
 
     methods: {
-        postActivityBtn(){
 
-
-            this.activityList.push({
+        /* tipsterAnonym(){
+            if(this.name == ""){
+                this.activityList.push({
+                    activity: this.activity,
+                category: this.selected,
+                score: "5",
+                tipster: "Anonymous",
+                estimatedTime: this.estimatedTime,
+                date: this.todaysDate
+                })
+            }else{
+                this.activityList.push({
                 activity: this.activity,
                 category: this.selected,
                 score: "5",
                 tipster: this.name,
                 estimatedTime: this.estimatedTime,
                 date: this.todaysDate
-            });  
+            });
+            }
+        }, */
+
+        postActivityBtn(){
+            
+            if(this.name == ""){
+            this.activityList.push({
+                activity: this.activity,
+                category: this.selected,
+                score: "3",
+                tipster: "Anonym",
+                estimatedTime: this.estimatedTime,
+                date: this.todaysDate
+            })} else{
+                 this.activityList.push({
+                activity: this.activity,
+                category: this.selected,
+                score: "3",
+                tipster: this.name,
+                estimatedTime: this.estimatedTime,
+                date: this.todaysDate
+            })
+            } 
         },
 
         findDuplicate(activity){
@@ -126,10 +164,9 @@ export default {
                 this.duplicate = true;
                 this.duplicateErrorMessage;
                 this.activityList.reduce((uniqe, item) =>{
-                   uniqe.includes(item) ? uniqe : [...uniqe, item], [] })
+                   uniqe.activityList(item) ? uniqe : [...uniqe, item], [] })
             }else {
                 this.duplicate = false;
-                this.duplicateErrorMessage = "";
             }
         }
     }
@@ -170,6 +207,11 @@ export default {
 
     body{
         background-color: #2F4858;
+    }
+
+    #opt {
+        opacity: 50%;
+        font-size: 75%;
     }
 
 </style>
