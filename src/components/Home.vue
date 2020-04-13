@@ -1,19 +1,21 @@
 <template>
 
-    <div class="home">
+  <div class="home">
+
 
 
 
     <div class="container">
 
-        <img src="./images/galaxy-blue.jpg" alt="galaxy" style="width:100%">
+        <img src="./images/nature-pic.jpg" alt="galaxy" style="width:100%">
             <h1>Glued to your computer during break? AppenDo helps you break FREE</h1>
             <button class="btn">Button</button>
-        </div>
-
-
-
     </div>
+
+
+
+  </div>
+
 
 
 
