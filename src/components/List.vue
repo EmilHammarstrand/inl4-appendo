@@ -24,7 +24,7 @@
                 <select @change="updateUserScore" name="score" id="submitScore">
                     <option value="1">1</option>
                     <option value="2">2</option>
-                    <option value="3">3</option>
+                    <option selected="selected" value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
@@ -110,21 +110,15 @@ export default {
             }
             if(this.sortBy == "estimatedTime"){
                 copy.sort( (a,b) => {
-                    if(a.estimatedTime.toLowerCase() < b.estimatedTime.toLowerCase()){
-                        return -1;
-                    } else if(a.estimatedTime.toLowerCase() > b.estimatedTime.toLowerCase()){
-                        return 1;
-                    } else {
-                        return 0;
-                    }
+                    return a - b;
                 })
             return copy
             }
             if(this.sortBy == "score"){
                 copy.sort( (a,b) => {
-                    if(a.score.toLowerCase() < b.score.toLowerCase()){
+                    if(a.score > b.score){
                         return -1;
-                    } else if(a.score.toLowerCase() > b.score.toLowerCase()){
+                    } else if(a.score < b.score){
                         return 1;
                     } else {
                         return 0;
