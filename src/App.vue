@@ -12,6 +12,12 @@
 
 <script>
 
+import Vue from 'vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+
 import Form from "./components/Form"
 import Home from "./components/Home"
 import List from "./components/List"
