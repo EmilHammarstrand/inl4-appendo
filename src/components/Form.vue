@@ -1,23 +1,27 @@
 <template>
     <div class="root">
 
+        <span v-if="showSuccessMessage" class="successMessage" >{{successMessage}}</span>
+
+
+
+
         <div class="form-group">
-            <label for="activity">  Activity: </label> <br />
-            <input type="text" placeholder="Enter a short suggestion..." name="activity" v-model="activity" :class="activityClass" @blur.once="activityIsTouched = true" >
-        <span v-if="!activityIsValid && activityIsTouched" class="error"> {{ activityErrorMessage }} </span>
+            <label for="activity"> Activity:</label> <br />
+            <input type="text" placeholder="A short suggestion..." name="activity" v-model="activity" :class="activityClass" @click="activityIsTouched = true" >
+            <span v-if="!activityIsValid && activityIsTouched" class="error"> {{ activityErrorMessage }} </span>
         </div>
 
 
         <div class="form-group">
-            <label for="name">Tipser: <span id="opt">(opt.)</span></label> <br />
+            <label for="name"> Tipster: <span id="opt">(opt.)</span></label> <br />
             <input type="text" name="name" placeholder="Enter your name..." v-model="name">
-            <!-- <span v-if="nameIsTouched && !nameIsValid" class="error"> {{ nameErrorMessage }} </span> -->
         </div>
 
 
         <div class="form-group">
-            <label for="dropdown">  Category: </label> <br />
-             <select name="dropdown" class="categoryButton" v-model="selected" :class="categoryClass" @blur.once="categoryIsTouched = true">
+            <label for="dropdown"> Category:</label> <br />
+             <select name="dropdown" class="categoryButton" v-model="selected" :class="categoryClass" @click="categoryIsTouched = true">
                 <option>Relax</option>
                 <option>Food</option>
                 <option>Exercise</option>
@@ -27,16 +31,15 @@
         </div>
 
         <div class="form-group">
-            <label for="estimatedTime">  Estimated minutes: </label> <br />
-            <input class="estTime" name="estimatedTime" type="number" v-model="estimatedTime" min="3" max="15" :class="timeClass" @blur.once="timeIsTouched = true" >
+            <label for="estimatedTime"> Estimated minutes:</label> <br />
+            <input class="estTime" name="estimatedTime" type="number" v-model="estimatedTime" min="3" max="15" :class="timeClass" @click="timeIsTouched = true" >
             <span v-if="!timeIsValid && timeIsTouched" class="error"> {{ timeErrorMessage }} </span>
         </div>
 
         <div class="form-group">
-            <button class = "btn btn-warning btn-md" :disabled="!isCompleted || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity); postActivityBtn(); "> Save</button>
+            <button class = "btn btn-warning btn-md" :disabled="!isCompleted || !activityIsValid || categoryIsValid || !timeIsValid" @click="findDuplicate(activity);">Post</button>
             <span v-if="duplicate" class="error"> {{ duplicateErrorMessage }} </span>
         </div>
-
     </div>
 </template>
 
@@ -54,12 +57,11 @@ export default {
         activity: "",
         selected: "",
         estimatedTime: "",
-        /* nameIsTouched: false, */
         activityIsTouched: false,
         categoryIsTouched: false,
         timeIsTouched: false,
-        formResult: false,
-        duplicate: false
+        duplicate: false,
+        showSuccessMessage: false
     }),
 
     props: {
@@ -67,19 +69,13 @@ export default {
     },
 
     computed: {
-        /* nameErrorMessage(){
-            return "Please enter at least two characters."
-        }, */
+
+        successMessage(){
+            return "Your activity was posted successfully."
+        },
         duplicateErrorMessage(){
             return "You cant post duplicates, try writing another activity."
         },
-        /* nameIsValid() {
-            return this.name.length >= 2;
-        } */
-        /* nameClass() {
-			if( !this.nameIsTouched ) return '';
-			return this.nameIsValid ? 'valid' : 'invalid';
-        }, */
         categoryIsValid() {
             return this.selected == 0;
         },
@@ -118,32 +114,10 @@ export default {
         timeClass() {
 			if( !this.timeIsTouched ) return '';
 			return this.timeIsValid ? 'valid' : 'invalid';
-        },
+        }
     },
 
     methods: {
-
-        /* tipsterAnonym(){
-            if(this.name == ""){
-                this.activityList.push({
-                    activity: this.activity,
-                category: this.selected,
-                score: "5",
-                tipster: "Anonymous",
-                estimatedTime: this.estimatedTime,
-                date: this.todaysDate
-                })
-            }else{
-                this.activityList.push({
-                activity: this.activity,
-                category: this.selected,
-                score: "5",
-                tipster: this.name,
-                estimatedTime: this.estimatedTime,
-                date: this.todaysDate
-            });
-            }
-        }, */
 
         postActivityBtn(){
 
@@ -163,18 +137,27 @@ export default {
                 tipster: this.name,
                 estimatedTime: this.estimatedTime,
                 date: this.todaysDate
-            })
-            }
+            })}
+
+
+            this.name = "";
+            this.selected = 0;
+            this.activity = "";
+            this.estimatedTime = "";
+            this.activityIsTouched = false;
+            this.categoryIsTouched = false;
+            this.timeIsTouched = false;
+
+            this.showSuccessMessage = true;
         },
 
         findDuplicate(activity){
             if(this.activityList.some(value => value.activity == activity)){
                 this.duplicate = true;
                 this.duplicateErrorMessage;
-                this.activityList.reduce((uniqe, item) =>{
-                   uniqe.activityList(item) ? uniqe : [...uniqe, item], [] })
             }else {
                 this.duplicate = false;
+                this.postActivityBtn();
             }
         }
     }
@@ -193,39 +176,50 @@ export default {
     select.invalid { border-color: green; }
 
     .error{
-        color: red;
+        color: #ff0000db;
         display:block;
+        font-weight: 600;
+        font-size: 18px;
+
     }
     .form-group{
         margin: 1em;
-
     }
     .estTime{
-        width: 174px;
+        width: 186px;
 
     }
-
     label, input, button, option{
         font-family: Quicksand;
     }
     label{
-        color: white;
+        color:white;
     }
     input{
         color: black;
+        padding: 5px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        resize: vertical;
     }
     .categoryButton {
-        width: 174px;
-
+        width: 186px;
+        padding: 5px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        resize: vertical;
     }
-
-    body{
-        background-color: #2F4858;
-    }
-
     #opt {
-        opacity: 50%;
+        opacity: 80%;
         font-size: 75%;
     }
+
+    .successMessage{
+        color: chartreuse;
+        font-size: 20px;
+        font-weight: 600;
+
+    }
+
 
 </style>

@@ -1,47 +1,61 @@
 <template>
-
   <div id="app">
-
-    <div class = "intro-text">
+    <div class="intro-text" id="toTop">
       <h1>AppenDo</h1>
-      <p>Glued to the computer during break? AppenDo helps you to break FREE</p>
-      <button class = "btn btn-lg btn-primary getstarted" @click="getStarted()" v-if="!showlistapp">Get Started</button>
+      <p v-if="!showlistapp">Glued to the computer during break? AppenDo helps you to break FREE</p>
+      <p v-if="showlistapp">Create your activity:</p>
+      <button
+        class="btn btn-lg btn-info getstarted"
+        @click="getStarted()"
+        v-if="!showlistapp"
+      >Get Started</button>
     </div>
 
-    <button class = "btn btn-lg btn-primary add-activity" @click="form()" v-if="showlistapp">Add activity</button>
-    <Home v-if="false" />
-    <div>
-      <List v-if="showlistapp" @emitDelete="deleteItem($event)"
-    @rateActivity="rateActivity($event)"
-    :activityList="activityList"/>
+
+    <img src="./assets/left-arrow.svg" class = "goBackButton" @click="showlistapp = !showlistapp" v-if="showlistapp" alt="backicon">
+
+    <a href="#formdiv-scroll">
+      <button
+        class="btn btn-lg btn-info add-activity"
+        @click="form()"
+        v-if="showlistapp"
+      >Add activity</button>
+    </a>
+
+    <div class="showing-whole-form" v-if="showlistapp">
+      <!-- <a href="anchor">To the bottom</a> -->
+
+      <Home v-if="false" />
+
+      <div>
+        <List
+          v-if="showlistapp"
+          @emitDelete="deleteItem($event)"
+          @rateActivity="rateActivity($event)"
+          :activityList="activityList"
+        />
+      </div>
+
+
+      <a href="#toTop" id="toTopButton">
+        <button class="btn btn-info btn-lg">Go Back Up</button>
+      </a>
+
+      <div class="form-div" id="formdiv-scroll">
+        <Form :activityList="activityList" />
+      </div>
+
+      <!-- <a id="anchor">To the Top</a> -->
     </div>
-
-  <div class = "form-div" v-if="showform">
-
-    <Form :activityList="activityList"/>
-
-  </div>
-    <!--<a id="anchor"></a>-->
   </div>
 </template>
 
-
-
 <script>
-
-/*
-import Vue from 'vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
-*/
-
-import Form from "./components/Form"
-import Home from "./components/Home"
-import List from "./components/List"
+import Form from "./components/Form";
+import Home from "./components/Home";
+import List from "./components/List";
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Form,
     Home,
@@ -49,7 +63,6 @@ export default {
   },
 
   data: () => ({
-
     showform: false,
     showlistapp: false,
     activityList: [
@@ -70,34 +83,35 @@ export default {
         date: "2019-07-21 18:02:22"
       },
       {
-         activity:"powernap",
-         category:"relax",
-         score:"3",
-         tipster:"computer",
-         estimatedTime:"10",
-         date: "2020-04-10 12:11:02"
+        activity: "powernap",
+        category: "relax",
+        score: "3",
+        tipster: "computer",
+        estimatedTime: "10",
+        date: "2020-04-10 12:11:02"
       },
       {
-         activity:"sleep",
-         category:"relax",
-         score:"3",
-         tipster:"computer",
-         estimatedTime:"10",
-         date: "2018-12-24 23:03:43"
+        activity: "sleep",
+        category: "relax",
+        score: "3",
+        tipster: "computer",
+        estimatedTime: "10",
+        date: "2018-12-24 23:03:43"
       }
     ]
   }),
   methods: {
-    deleteItem(key){
-       this.activityList = this.activityList.filter( item => item.activity != key)
-
+    deleteItem(key) {
+      this.activityList = this.activityList.filter(
+        item => item.activity != key
+      );
     },
-    rateActivity(keys){
-      this.activityList = this.activityList.filter((item) => {
-        if( item.activity == keys.key ){
+    rateActivity(keys) {
+      this.activityList = this.activityList.filter(item => {
+        if (item.activity == keys.key) {
           item.score = keys.score;
           return item;
-        } else{
+        } else {
           return item;
         }
       });
@@ -105,91 +119,151 @@ export default {
     getStarted() {
       this.showlistapp = true;
       this.showform = false;
-
-
-  },
+    },
     form() {
-      this.showlistapp = false;
-      this.showform = true;
+      window.scrollTo(0, 50);
 
+      // this.showlistapp = false;
+      // this.showform = true;
     }
-
   },
+  mounted() {
+    if (localStorage.length == 1) {
+      localStorage.setItem("activityList", JSON.stringify(this.activityList));
+    } else {
+      this.activityList = JSON.parse(localStorage.getItem("activityList"));
+    }
+  },
+  updated() {
+    console.log("I updated");
 
-
-
-
-}
+    localStorage.setItem("activityList", JSON.stringify(this.activityList));
+  }
+};
 </script>
 
 <style>
-
-@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
-
-body {
-
-  background-image: url('./components/images/nature-pic.jpg');
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-  background: no-repeat;
-
-}
-
-.getstarted {
-
-  margin-top: 150px;
-}
-
-.add-activity {
-
-float: right;
-}
-
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-
-
-}
-
-.intro-text {
-
-  color: white;
-  text-align: center;
-  padding: 30px;
-  margin: 0px 20px 20px 20px;
-
-}
-.form-div {
-text-align: center;
-
-}
+@import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
 
 #app {
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   letter-spacing: 0.5px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  background-image: url('./components/images/nature-pic.jpg');
+  background-image: url("./components/images/nature-edited.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-attachment: fixed;
   z-index: -1;
-
-
+  overflow: auto;
 }
+.goBackButton {
 
-button{
+  height: 40px;
+  width: 40;
+  margin-left: 20px;
   cursor: pointer;
 }
 
-a{
+
+.getstarted {
+  margin-top: 83px;
+  font-size: 1.2rem;
+  width: 200px;
+  height: 87px;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+.add-activity {
+  float: right;
+  margin-right: 20px;
+  margin-bottom: 15px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+.intro-text {
+  color: white;
+  text-align: center;
+  padding: 30px;
+  margin: 0px 20px 20px 20px;
+}
+
+.intro-text > h1 {
+  font-size: 5rem;
+}
+
+.form-div {
+  text-align: center;
+  margin-top: 60px;
+  padding-top: 20px;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
   text-decoration: none;
   cursor: default;
+  color: white;
+  display: flow-root;
 }
+
+#toTopButton {
+  float: right;
+  margin-right: 20px;
+  margin-top: 15px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(134, 140, 143);
+}
+
+::-webkit-scrollbar-thumb {
+
+  background: rgb(42, 41, 41);
+}
+
+
+@media(max-width: 411px) {
+
+.intro-text > h1 {
+  font-size: 3rem;
+}
+
+
+
+}
+
+@media(max-width: 786px) {
+
+.intro-text > h1 {
+  font-size: 4rem;
+}
+
+
+}
+
+
+
 </style>
