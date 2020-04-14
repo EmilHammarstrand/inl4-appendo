@@ -241,8 +241,7 @@ export default {
         font-family:'Quicksand', sans-serif;
     }
     div.activityCard{
-        border-bottom: 2px solid grey;
-        margin-bottom: .5rem;
+        border-bottom: 1px solid grey;
         background-color:#465F6F;
         opacity: 87%;
         color:white;
@@ -253,7 +252,7 @@ export default {
 
     .scroll-list {
 
-        overflow: auto;
+        overflow-y: scroll;
         max-height: 750px;
         min-height: 250px;
         margin: 0px 20px 0px 20px;
@@ -265,9 +264,7 @@ export default {
     div.activityCard div:first-child{
         border: 2px solid red;
     }
-    div.activityCard div:last-child{
-        border: 2px solid grey;
-    }
+
     span{
         font-weight: 600;
     }
@@ -325,6 +322,7 @@ export default {
         background-color:#96BB53;
         padding:0.5em;
         border:1px solid white;
+        width: 16.46%;
         /*border-radius:0.5em;*/
 
     }
@@ -335,17 +333,16 @@ export default {
 
 ::-webkit-scrollbar {
   width: 5px;
+
 }
 
 ::-webkit-scrollbar-track {
-  background: rgb(102, 102, 102);
+  background: rgba(70, 95, 111, 0.87);
 }
-
 
 ::-webkit-scrollbar-thumb {
-  /* background: #888;  */
-  background: transparent;
-}
 
+  background: rgb(61, 60, 60);
+}
 
 </style>
