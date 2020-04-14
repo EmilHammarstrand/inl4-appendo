@@ -127,7 +127,7 @@ export default {
   },
   updated(){
     console.log("I updated");
-    
+
     localStorage.setItem("activityList", JSON.stringify(this.activityList))
 
   }
@@ -150,7 +150,10 @@ body {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-  background: no-repeat;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: right;
+  height: 100vh;
 
 } */
 
