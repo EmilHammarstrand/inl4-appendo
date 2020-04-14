@@ -244,6 +244,7 @@ export default {
         border-bottom: 2px solid grey;
         margin-bottom: .5rem;
         background-color:#465F6F;
+        opacity: 87%;
         color:white;
         display: flex;
         justify-content: space-between;
@@ -254,8 +255,9 @@ export default {
 
         overflow: auto;
         max-height: 750px;
-        min-height: 500px;
-        border: 1px solid green;
+        min-height: 250px;
+        margin: 0px 20px 0px 20px;
+
 
     }
 
@@ -311,6 +313,14 @@ export default {
         padding: .5rem;
         cursor: pointer;
     }
+
+.sortButtons {
+
+     margin-left: 20px;
+
+}
+
+
     .sortButtons > button{
         background-color:#96BB53;
         padding:0.5em;

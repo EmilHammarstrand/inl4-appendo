@@ -2,15 +2,17 @@
 
   <div id="app">
 
-    <div class = "intro-text">
+    <div class = "intro-text" id= "toTop">
       <h1>AppenDo</h1>
       <p>Glued to the computer during break? AppenDo helps you to break FREE</p>
       <button class = "btn btn-lg btn-info getstarted" @click="getStarted()" v-if="!showlistapp">Get Started</button>
     </div>
 
 <div class = "showing-whole-form" v-if="showlistapp">
-<a href="anchor">To the bottom</a>
-    <button class = "btn btn-lg btn-primary add-activity" @click="form()" v-if="showlistapp">Add activity</button>
+<!-- <a href="anchor">To the bottom</a> -->
+
+    <a href="#formdiv-scroll"><button class = "btn btn-lg btn-info add-activity"  @click="form()" v-if="showlistapp">Add activity</button></a>
+
     <Home v-if="false" />
 
     <div>
@@ -20,14 +22,17 @@
 
     </div>
 
-      <div class = "form-div">
+      <div class = "form-div" id="formdiv-scroll" >
 
       <Form :activityList="activityList"/>
 
 
       </div>
 
-      <a id="anchor">To the Top</a>
+      <!-- <a id="anchor">To the Top</a> -->
+      <a href="#toTop"><button class = "btn btn-info">To Top</button></a>
+
+
 
   </div>
   </div>
@@ -104,16 +109,24 @@ export default {
       });
     },
     getStarted() {
+
       this.showlistapp = true;
       this.showform = false;
 
 
   },
     form() {
-      this.showlistapp = false;
-      this.showform = true;
+
+
+        window.scrollTo(0, 50);
+
+
+      // this.showlistapp = false;
+      // this.showform = true;
 
     }
+
+
 
   },
   mounted(){
@@ -200,6 +213,7 @@ float: right;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 
 
 }
@@ -232,5 +246,6 @@ button{
 a{
   text-decoration: none;
   cursor: default;
+  color: white;
 }
 </style>
