@@ -1,360 +1,348 @@
 <template>
-    <div class="root">
-
-
-
-
-        <div class="sortButtons">
-            <button :class="latestIsActive" @click="sortByThis('latest')">Latest</button>
-            <button :class="activityIsActive" @click="sortByThis('activity')">Activity</button>
-            <button :class="categoryIsActive" @click="sortByThis('category')">Category</button>
-            <button :class="tipsterIsActive" @click="sortByThis('tipster')">Tipster</button>
-            <button :class="estimatedTimeIsActive" @click="sortByThis('estimatedTime')">Time</button>
-            <button :class="scoreIsActive" @click="sortByThis('score')">Score</button>
-        </div>
-
-    <div class = "scroll-list">
-        <div v-for="activity in sortList" class="activityCard" :key="activity.activity">
-            <div>
-                <h3>{{activity.activity}}</h3>
-                <p> <span>Category:</span>  {{activity.category}}</p>
-                <p> <span>Tipster:</span>  {{activity.tipster}}</p>
-                <p> <span>Estimated time:</span>  {{activity.estimatedTime}} min</p>
-                <p class="created"><span class="created">Created: </span>{{activity.date}}</p>
-            </div>
-
-            <div class="optionDiv">
-                <img @click="emitDelete(activity.activity)" src="../assets/trash.png" alt="delete" class="delete">
-                <label for="score">Rate activity: </label>
-
-
-
-                <select @change="updateUserScore" name="score" id="submitScore" @click="scoreIsClicked=true">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option selected="selected" value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                <button @click="rateActivity(activity.activity)" :disabled="!scoreIsClicked">Submit</button>
-                <p class="score"> <span class="score">Score: </span> {{activity.score}}</p>
-            </div>
-        </div>
+  <div class="root">
+    <div class="sortButtons">
+      <button :class="latestIsActive" @click="sortByThis('latest')">Latest</button>
+      <button :class="activityIsActive" @click="sortByThis('activity')">Activity</button>
+      <button :class="categoryIsActive" @click="sortByThis('category')">Category</button>
+      <button :class="tipsterIsActive" @click="sortByThis('tipster')">Tipster</button>
+      <button :class="estimatedTimeIsActive" @click="sortByThis('estimatedTime')">Time</button>
+      <button :class="scoreIsActive" @click="sortByThis('score')">Score</button>
     </div>
 
+    <div class="scroll-list">
+      <div v-for="activity in sortList" class="activityCard" :key="activity.activity">
+        <div>
+          <h3>{{activity.activity}}</h3>
+          <p>
+            <span>Category:</span>
+            {{activity.category}}
+          </p>
+          <p>
+            <span>Tipster:</span>
+            {{activity.tipster}}
+          </p>
+          <p>
+            <span>Estimated time:</span>
+            {{activity.estimatedTime}} min
+          </p>
+          <p class="created">
+            <span class="created">Created:</span>
+            {{activity.date}}
+          </p>
+        </div>
 
+        <div class="optionDiv">
+          <img
+            @click="emitDelete(activity.activity)"
+            src="../assets/trash.png"
+            alt="delete"
+            class="delete"
+          />
+          <label for="score">Rate activity:</label>
+
+          <select
+            @change="updateUserScore"
+            name="score"
+            id="submitScore"
+            @click="scoreIsClicked=true"
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option selected="selected" value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <button @click="rateActivity(activity.activity)" :disabled="!scoreIsClicked">Submit</button>
+          <p class="score">
+            <span class="score">Score:</span>
+            {{activity.score}}
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
+import Vue from "vue";
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 
-import Vue from 'vue';
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
-
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 
 export default {
-    data: () => ({
-
-        sortBy: "latest",
-        latestActive: true,
-        activityActive: false,
-        categoryActive: false,
-        tipsterActive: false,
-        estimatedTimeActive: false,
-        scoreActive: false,
-        userScore: 3,
-        scoreIsClicked:false
-
-    }),
-    computed:{
-        latestIsActive(){
-            return this.latestActive ? "activeClass" : "";
-        },
-        activityIsActive(){
-            return this.activityActive ? "activeClass" : "";
-        },
-        categoryIsActive(){
-            return this.categoryActive ? "activeClass" : "";
-        },
-        tipsterIsActive(){
-            return this.tipsterActive ? "activeClass" : "";
-        },
-        estimatedTimeIsActive(){
-            return this.estimatedTimeActive ? "activeClass" : "";
-        },
-        scoreIsActive(){
-            return this.scoreActive ? "activeClass" : "";
-        },
-
-
-        sortList(){
-
-            let copy = [...this.activityList];
-
-            if(this.sortBy == "latest"){
-                copy.sort( (a,b) => {
-                    if(a.date < b.date){
-                        return -1;
-                    } else if(a.date > b.date){
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-                })
-                return copy.reverse();
-            }
-            if(this.sortBy == "activity"){
-                copy.sort( (a,b) => {
-                    if(a.activity.toLowerCase() < b.activity.toLowerCase()){
-                        return -1;
-                    } else if(a.activity.toLowerCase() > b.activity.toLowerCase()){
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-                })
-                return copy
-            }
-            if(this.sortBy == "category"){
-                copy.sort( (a,b) => {
-                    if(a.category.toLowerCase() < b.category.toLowerCase()){
-                        return -1;
-                    } else if(a.category.toLowerCase() > b.category.toLowerCase()){
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-                })
-                return copy
-            }
-            if(this.sortBy == "tipster"){
-                copy.sort( (a,b) => {
-                    if(a.tipster.toLowerCase() < b.tipster.toLowerCase()){
-                        return -1;
-                    } else if(a.tipster.toLowerCase() > b.tipster.toLowerCase()){
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-                })
-                return copy
-            }
-            if(this.sortBy == "estimatedTime"){
-                copy.sort( (a,b) => {
-                    return a - b;
-                })
-            return copy
-            }
-            if(this.sortBy == "score"){
-                copy.sort( (a,b) => {
-                    if(a.score > b.score){
-                        return -1;
-                    } else if(a.score < b.score){
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-                })
-            return copy
-            }
-
-            return copy
-        }//slut sortlist
-
-
-
-
-
-
-
-    },//slut computed
-    methods:{
-        sortByThis(sortThis){
-            this.sortBy = sortThis;
-            if(sortThis == "activity"){
-                this.latestActive = false;
-                this.activityActive = true;
-                this.categoryActive = false;
-                this.tipsterActive = false;
-                this.scoreActive = false;
-                this.estimatedTimeActive = false;
-            } else if(sortThis == "category"){
-                this.latestActive = false;
-                this.activityActive = false;
-                this.categoryActive = true;
-                this.tipsterActive = false;
-                this.scoreActive = false;
-                this.estimatedTimeActive = false;
-            } else if(sortThis == "tipster"){
-                this.latestActive = false;
-                this.activityActive = false;
-                this.categoryActive = false;
-                this.tipsterActive = true;
-                this.scoreActive = false;
-                this.estimatedTimeActive = false;
-            } else if(sortThis == "estimatedTime"){
-                this.latestActive = false;
-                this.activityActive = false;
-                this.categoryActive = false;
-                this.tipsterActive = false;
-                this.scoreActive = false;
-                this.estimatedTimeActive = true;
-            } else if(sortThis == "score"){
-                this.latestActive = false;
-                this.activityActive = false;
-                this.categoryActive = false;
-                this.tipsterActive = false;
-                this.scoreActive = true;
-                this.estimatedTimeActive = false;
-            } else {
-                this.latestActive = true;
-                this.activityActive = false;
-                this.categoryActive = false;
-                this.tipsterActive = false;
-                this.scoreActive = false;
-                this.estimatedTimeActive = false;
-            }
-        },
-        emitDelete(key){
-            this.$emit('emitDelete', key);
-        },
-        updateUserScore(){
-            this.userScore = event.target.value;
-        },
-        rateActivity(key){
-            this.$emit('rateActivity', {'score':this.userScore, 'key': key});
-        }
-
+  data: () => ({
+    sortBy: "latest",
+    latestActive: true,
+    activityActive: false,
+    categoryActive: false,
+    tipsterActive: false,
+    estimatedTimeActive: false,
+    scoreActive: false,
+    userScore: 3,
+    scoreIsClicked: false
+  }),
+  computed: {
+    latestIsActive() {
+      return this.latestActive ? "activeClass" : "";
+    },
+    activityIsActive() {
+      return this.activityActive ? "activeClass" : "";
+    },
+    categoryIsActive() {
+      return this.categoryActive ? "activeClass" : "";
+    },
+    tipsterIsActive() {
+      return this.tipsterActive ? "activeClass" : "";
+    },
+    estimatedTimeIsActive() {
+      return this.estimatedTimeActive ? "activeClass" : "";
+    },
+    scoreIsActive() {
+      return this.scoreActive ? "activeClass" : "";
     },
 
-    props: {
-        activityList: Array
+    sortList() {
+      let copy = [...this.activityList];
+
+      if (this.sortBy == "latest") {
+        copy.sort((a, b) => {
+          if (a.date < b.date) {
+            return -1;
+          } else if (a.date > b.date) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        return copy.reverse();
+      }
+      if (this.sortBy == "activity") {
+        copy.sort((a, b) => {
+          if (a.activity.toLowerCase() < b.activity.toLowerCase()) {
+            return -1;
+          } else if (a.activity.toLowerCase() > b.activity.toLowerCase()) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        return copy;
+      }
+      if (this.sortBy == "category") {
+        copy.sort((a, b) => {
+          if (a.category.toLowerCase() < b.category.toLowerCase()) {
+            return -1;
+          } else if (a.category.toLowerCase() > b.category.toLowerCase()) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        return copy;
+      }
+      if (this.sortBy == "tipster") {
+        copy.sort((a, b) => {
+          if (a.tipster.toLowerCase() < b.tipster.toLowerCase()) {
+            return -1;
+          } else if (a.tipster.toLowerCase() > b.tipster.toLowerCase()) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        return copy;
+      }
+      if (this.sortBy == "estimatedTime") {
+        copy.sort((a, b) => {
+          return a - b;
+        });
+        return copy;
+      }
+      if (this.sortBy == "score") {
+        copy.sort((a, b) => {
+          if (a.score > b.score) {
+            return -1;
+          } else if (a.score < b.score) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        return copy;
+      }
+
+      return copy;
+    } //slut sortlist
+  }, //slut computed
+  methods: {
+    sortByThis(sortThis) {
+      this.sortBy = sortThis;
+      if (sortThis == "activity") {
+        this.latestActive = false;
+        this.activityActive = true;
+        this.categoryActive = false;
+        this.tipsterActive = false;
+        this.scoreActive = false;
+        this.estimatedTimeActive = false;
+      } else if (sortThis == "category") {
+        this.latestActive = false;
+        this.activityActive = false;
+        this.categoryActive = true;
+        this.tipsterActive = false;
+        this.scoreActive = false;
+        this.estimatedTimeActive = false;
+      } else if (sortThis == "tipster") {
+        this.latestActive = false;
+        this.activityActive = false;
+        this.categoryActive = false;
+        this.tipsterActive = true;
+        this.scoreActive = false;
+        this.estimatedTimeActive = false;
+      } else if (sortThis == "estimatedTime") {
+        this.latestActive = false;
+        this.activityActive = false;
+        this.categoryActive = false;
+        this.tipsterActive = false;
+        this.scoreActive = false;
+        this.estimatedTimeActive = true;
+      } else if (sortThis == "score") {
+        this.latestActive = false;
+        this.activityActive = false;
+        this.categoryActive = false;
+        this.tipsterActive = false;
+        this.scoreActive = true;
+        this.estimatedTimeActive = false;
+      } else {
+        this.latestActive = true;
+        this.activityActive = false;
+        this.categoryActive = false;
+        this.tipsterActive = false;
+        this.scoreActive = false;
+        this.estimatedTimeActive = false;
+      }
+    },
+    emitDelete(key) {
+      this.$emit("emitDelete", key);
+    },
+    updateUserScore() {
+      this.userScore = event.target.value;
+    },
+    rateActivity(key) {
+      this.$emit("rateActivity", { score: this.userScore, key: key });
     }
-} //slut export default
+  },
+
+  props: {
+    activityList: Array
+  }
+}; //slut export default
 </script>
 
 <style scoped>
-    @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
-    *{
-        font-family:'Quicksand', sans-serif;
-    }
-    div.activityCard{
-        border-bottom: 1px solid grey;
-        background-color:#465F6F;
-        opacity: 87%;
-        color:white;
-        display: flex;
-        justify-content: space-between;
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Baloo+Paaji+2&display=swap");
+* {
+  font-family: "Quicksand", sans-serif;
+}
+div.activityCard {
+  border-bottom: 1px solid grey;
+  background-color: #465f6f;
+  opacity: 87%;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
 
-    }
-
-    .scroll-list {
-
-        overflow-y: scroll;
-        max-height: 750px;
-        min-height: 250px;
-        margin: 0px 20px 0px 20px;
-        border-bottom-left-radius: 15px;
-
-
-    }
-
+.scroll-list {
+  overflow-y: scroll;
+  max-height: 750px;
+  min-height: 250px;
+  margin: 0px 20px 0px 20px;
+  border-bottom-left-radius: 15px;
+}
 
 p.score {
-
-    display: inline-flex;
+  display: inline-flex;
 }
 
-    span{
-        font-weight: 600;
-    }
-    h3{
-        padding-top:0.5em;
-        padding-bottom:0.3em;
-        margin: .3rem .3rem .3rem .5rem
+span {
+  font-weight: 600;
+}
+h3 {
+  padding-top: 0.5em;
+  padding-bottom: 0.3em;
+  margin: 0.3rem 0.3rem 0.3rem 0.5rem;
+}
+p {
+  margin: 0.3rem 0.3rem 0.3rem 0.5rem;
+  font-size: 1rem;
+}
+p.created,
+span.created {
+  font-size: 0.7rem;
+}
+.optionDiv {
+  display: flex;
+  flex-direction: column;
+  width: min-content;
+  padding: 0.2rem 0.2rem 0.2rem;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+}
+p.score,
+span.score {
+  padding-right: 0.6rem;
+}
+select {
+  margin-top: 0.3rem;
+}
+.optionDiv button {
+  width: 4rem;
+  margin-top: 0.3rem;
+  border-radius: 4px;
+  border: none;
+  padding: 5px;
+  color: black;
+  background-color: #17a2b8;
+  font-weight: bold;
+}
 
-    }
-    p{
-       margin: .3rem .3rem .3rem .5rem;
+.optionDiv select {
+  width: 4rem;
+  padding: 5px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  resize: vertical;
+  margin-top: 0.3rem;
+}
 
-    }
-    p.created,
-    span.created{
-        font-size: .7rem;
-    }
-    .optionDiv{
-        display: flex;
-        flex-direction: column;
-        width: 11rem;
-        padding: .2rem 2rem .2rem;
-        align-items: center;
-        justify-content: space-evenly;
-
-
-    }
-    p.score,
-    span.score{
-        padding-right: .6rem;
-    }
-    select{
-        margin-top: .3rem;
-    }
-    .optionDiv button{
-        width: 4rem;
-        margin-top: .3rem;
-        border-radius: 4px;
-        border: none;
-        padding: 5px;
-        color: black;
-        background-color: #17a2b8;
-        font-weight: bold;
-    }
-
-    .optionDiv select{
-        width: 4rem;
-        padding: 5px;
-        border: 1px solid #cccccc;
-        border-radius: 4px;
-        resize: vertical;
-        margin-top: .3rem;
-
-
-    }
-
-
-
-    img.delete{
-        object-fit: scale-down;
-        height: 3rem;
-        padding: .5rem;
-        cursor: pointer;
-    }
+img.delete {
+  object-fit: scale-down;
+  height: 3rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
 
 .sortButtons {
-
-     margin-left: 20px;
-
+  margin-left: 20px;
 }
 
+.sortButtons > button {
+  background-color: #96bb53;
+  padding: 0.5em;
+  border: 1px solid white;
+  width: 16.46%;
+  /*border-radius:0.5em;*/
+}
 
-    .sortButtons > button{
-        background-color:#96BB53;
-        padding:0.5em;
-        border:1px solid white;
-        width: 16.46%;
-        /*border-radius:0.5em;*/
-
-    }
-
-    .sortButtons > .activeClass{
-        background-color: #EFC748;
-    }
+.sortButtons > .activeClass {
+  background-color: #efc748;
+}
 
 ::-webkit-scrollbar {
   width: 5px;
-
 }
 
 ::-webkit-scrollbar-track {
@@ -362,8 +350,41 @@ p.score {
 }
 
 ::-webkit-scrollbar-thumb {
-
   background: rgb(61, 60, 60);
 }
 
+@media (max-width: 412px) {
+  .sortButtons > button {
+    background-color: #96bb53;
+    padding: 0.5em;
+    font-size: 12px;
+    border: 1px solid white;
+    width: 15.86%;
+    /*border-radius:0.5em;*/
+  }
+}
+
+
+/* @media (max-width: 769px) {
+  .sortButtons > button {
+    background-color: #96bb53;
+    padding: 0.5em;
+    font-size: 12px;
+    border: 1px solid white;
+    width: 16.3%;
+
+  }
+} */
+
+
+/* @media (max-width: 1025px) {
+  .sortButtons > button {
+    background-color: #96bb53;
+    padding: 0.5em;
+    border: 1px solid white;
+    width: 16.34%;
+
+  }
+}
+*/
 </style>

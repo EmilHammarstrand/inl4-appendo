@@ -11,6 +11,9 @@
       >Get Started</button>
     </div>
 
+
+    <img src="./assets/left-arrow.svg" class = "goBackButton" @click="showlistapp = !showlistapp" v-if="showlistapp" alt="backicon">
+
     <a href="#formdiv-scroll">
       <button
         class="btn btn-lg btn-info add-activity"
@@ -160,6 +163,13 @@ export default {
   z-index: -1;
   overflow: auto;
 }
+.goBackButton {
+
+  height: 40px;
+  width: 40;
+  margin-left: 20px;
+  cursor: pointer;
+}
 
 
 .getstarted {
@@ -234,6 +244,25 @@ a {
   background: rgb(42, 41, 41);
 }
 
+
+@media(max-width: 411px) {
+
+.intro-text > h1 {
+  font-size: 3rem;
+}
+
+
+
+}
+
+@media(max-width: 786px) {
+
+.intro-text > h1 {
+  font-size: 4rem;
+}
+
+
+}
 
 
 
