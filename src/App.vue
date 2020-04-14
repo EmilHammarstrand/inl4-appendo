@@ -1,53 +1,56 @@
 <template>
-
   <div id="app">
-
-    <div class = "intro-text" id= "toTop">
+    <div class="intro-text" id="toTop">
       <h1>AppenDo</h1>
       <p>Glued to the computer during break? AppenDo helps you to break FREE</p>
-      <button class = "btn btn-lg btn-info getstarted" @click="getStarted()" v-if="!showlistapp">Get Started</button>
+      <button
+        class="btn btn-lg btn-info getstarted"
+        @click="getStarted()"
+        v-if="!showlistapp"
+      >Get Started</button>
     </div>
 
-<div class = "showing-whole-form" v-if="showlistapp">
-<!-- <a href="anchor">To the bottom</a> -->
+    <a href="#formdiv-scroll">
+      <button
+        class="btn btn-lg btn-info add-activity"
+        @click="form()"
+        v-if="showlistapp"
+      >Add activity</button>
+    </a>
 
-    <a href="#formdiv-scroll"><button class = "btn btn-lg btn-info add-activity"  @click="form()" v-if="showlistapp">Add activity</button></a>
+    <div class="showing-whole-form" v-if="showlistapp">
+      <!-- <a href="anchor">To the bottom</a> -->
 
-    <Home v-if="false" />
+      <Home v-if="false" />
 
-    <div>
-      <List v-if="showlistapp" @emitDelete="deleteItem($event)"
-      @rateActivity="rateActivity($event)"
-      :activityList="activityList"/>
+      <div>
+        <List
+          v-if="showlistapp"
+          @emitDelete="deleteItem($event)"
+          @rateActivity="rateActivity($event)"
+          :activityList="activityList"
+        />
+      </div>
 
-    </div>
+      <a href="#toTop" id="toTopButton">
+        <button class="btn btn-info">To Top</button>
+      </a>
 
-      <div class = "form-div" id="formdiv-scroll" >
-
-      <Form :activityList="activityList"/>
-
-
+      <div class="form-div" id="formdiv-scroll">
+        <Form :activityList="activityList" />
       </div>
 
       <!-- <a id="anchor">To the Top</a> -->
-      <a href="#toTop"><button class = "btn btn-info">To Top</button></a>
-
-
-
-  </div>
+    </div>
   </div>
 </template>
 
-
-
 <script>
-
-
-import Form from "./components/Form"
-import Home from "./components/Home"
-import List from "./components/List"
+import Form from "./components/Form";
+import Home from "./components/Home";
+import List from "./components/List";
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Form,
     Home,
@@ -55,7 +58,6 @@ export default {
   },
 
   data: () => ({
-
     showform: false,
     showlistapp: false,
     activityList: [
@@ -76,98 +78,75 @@ export default {
         date: "2019-07-21 18:02:22"
       },
       {
-         activity:"powernap",
-         category:"relax",
-         score:"3",
-         tipster:"computer",
-         estimatedTime:"10",
-         date: "2020-04-10 12:11:02"
+        activity: "powernap",
+        category: "relax",
+        score: "3",
+        tipster: "computer",
+        estimatedTime: "10",
+        date: "2020-04-10 12:11:02"
       },
       {
-         activity:"sleep",
-         category:"relax",
-         score:"3",
-         tipster:"computer",
-         estimatedTime:"10",
-         date: "2018-12-24 23:03:43"
+        activity: "sleep",
+        category: "relax",
+        score: "3",
+        tipster: "computer",
+        estimatedTime: "10",
+        date: "2018-12-24 23:03:43"
       }
     ]
   }),
   methods: {
-    deleteItem(key){
-       this.activityList = this.activityList.filter( item => item.activity != key)
-
+    deleteItem(key) {
+      this.activityList = this.activityList.filter(
+        item => item.activity != key
+      );
     },
-    rateActivity(keys){
-      this.activityList = this.activityList.filter((item) => {
-        if( item.activity == keys.key ){
+    rateActivity(keys) {
+      this.activityList = this.activityList.filter(item => {
+        if (item.activity == keys.key) {
           item.score = keys.score;
           return item;
-        } else{
+        } else {
           return item;
         }
       });
     },
     getStarted() {
-
       this.showlistapp = true;
       this.showform = false;
-
-
-  },
+    },
     form() {
-
-
-        window.scrollTo(0, 50);
-
+      window.scrollTo(0, 50);
 
       // this.showlistapp = false;
       // this.showform = true;
-
     }
-
-
-
   },
-  mounted(){
-
-    if (localStorage.length==1){
-
-      localStorage.setItem("activityList", JSON.stringify(this.activityList))
+  mounted() {
+    if (localStorage.length == 1) {
+      localStorage.setItem("activityList", JSON.stringify(this.activityList));
+    } else {
+      this.activityList = JSON.parse(localStorage.getItem("activityList"));
     }
-    else{
-
-      this.activityList=JSON.parse(localStorage.getItem("activityList"))
-    }
-
   },
-  updated(){
+  updated() {
     console.log("I updated");
 
-    localStorage.setItem("activityList", JSON.stringify(this.activityList))
-
+    localStorage.setItem("activityList", JSON.stringify(this.activityList));
   }
-
-
-
-
-}
+};
 </script>
 
 <style>
-
-@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
 
 #app {
-
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   letter-spacing: 0.5px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  background-image: url('./components/images/nature-edited.jpg');
+  background-image: url("./components/images/nature-edited.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -178,74 +157,60 @@ export default {
   background-attachment: fixed;
   z-index: -1;
   overflow: auto;
-
-
-
-
-} */
-
-
+} 
 
 
 .getstarted {
-
   margin-top: 83px;
   font-size: 1.2rem;
   width: 200px;
   height: 87px;
-
 }
 
-
-
 p {
-
-font-size: 1.5rem;
-
+  font-size: 1.5rem;
 }
 
 .add-activity {
-
-float: right;
+  float: right;
+  margin-right: 20px;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
-
-
 }
 
 .intro-text {
-
   color: white;
   text-align: center;
   padding: 30px;
   margin: 0px 20px 20px 20px;
-
 }
 
 .intro-text > h1 {
-
   font-size: 5rem;
 }
 
 .form-div {
-
-text-align: center;
-
+  text-align: center;
 }
 
-
-button{
+button {
   cursor: pointer;
 }
 
-a{
+a {
   text-decoration: none;
   cursor: default;
   color: white;
+  display: flow-root;
+}
+
+#toTopButton {
+  float: right;
+  margin-right: 20px;
 }
 </style>
