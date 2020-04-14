@@ -296,7 +296,7 @@ export default {
         background-color:#96BB53;
         padding:0.5em;
         border:1px solid white;
-        border-radius:0.5em;
+        /*border-radius:0.5em;*/
 
     }
 

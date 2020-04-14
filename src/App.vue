@@ -131,9 +131,10 @@ export default {
 
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
+
 body {
 
-  background-image: url('./components/images/nature-pic.jpg');
+  background-image: url('./components/images/nature-edited.jpg');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -176,12 +177,13 @@ text-align: center;
 }
 
 #app {
+
   font-family: 'Quicksand', sans-serif;
   letter-spacing: 0.5px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  background-image: url('./components/images/nature-pic.jpg');
+  background-image: url('./components/images/nature-edited.jpg');
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
