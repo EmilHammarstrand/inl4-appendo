@@ -2,15 +2,17 @@
 
   <div id="app">
 
-    <div class = "intro-text">
+    <div class = "intro-text" id= "toTop">
       <h1>AppenDo</h1>
       <p>Glued to the computer during break? AppenDo helps you to break FREE</p>
-      <button class = "btn btn-lg btn-primary getstarted" @click="getStarted()" v-if="!showlistapp">Get Started</button>
+      <button class = "btn btn-lg btn-info getstarted" @click="getStarted()" v-if="!showlistapp">Get Started</button>
     </div>
 
 <div class = "showing-whole-form" v-if="showlistapp">
-<a href="anchor">To the bottom</a>
-    <button class = "btn btn-lg btn-primary add-activity" @click="form()" v-if="showlistapp">Add activity</button>
+<!-- <a href="anchor">To the bottom</a> -->
+
+    <a href="#formdiv-scroll"><button class = "btn btn-lg btn-info add-activity"  @click="form()" v-if="showlistapp">Add activity</button></a>
+
     <Home v-if="false" />
 
     <div>
@@ -19,12 +21,18 @@
       :activityList="activityList"/>
 
     </div>
-<a id="anchor">To the Top</a>
-      <div class = "form-div">
+
+      <div class = "form-div" id="formdiv-scroll" >
 
       <Form :activityList="activityList"/>
 
+
       </div>
+
+      <!-- <a id="anchor">To the Top</a> -->
+      <a href="#toTop"><button class = "btn btn-info">To Top</button></a>
+
+
 
   </div>
   </div>
@@ -101,16 +109,24 @@ export default {
       });
     },
     getStarted() {
+
       this.showlistapp = true;
       this.showform = false;
 
 
   },
     form() {
-      this.showlistapp = false;
-      this.showform = true;
+
+
+        window.scrollTo(0, 50);
+
+
+      // this.showlistapp = false;
+      // this.showform = true;
 
     }
+
+
 
   },
   mounted(){
@@ -143,25 +159,40 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
 
-body {
 
+#app {
+
+  font-family: 'Quicksand', sans-serif;
+  letter-spacing: 0.5px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
   background-image: url('./components/images/nature-edited.jpg');
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
-  background-size: cover;
   -o-background-size: cover;
-  background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: right;
-  height: 100vh;
+  z-index: -1;
+  overflow: auto;
+
+
+
 
 } */
 
+
+
+
 .getstarted {
 
-  margin-top: 150px;
+  margin-top: 83px;
   font-size: 1.2rem;
-
+  width: 200px;
+  height: 87px;
 
 }
 
@@ -182,6 +213,7 @@ float: right;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 
 
 }
@@ -206,19 +238,6 @@ text-align: center;
 
 }
 
-#app {
-
-  font-family: 'Quicksand', sans-serif;
-  letter-spacing: 0.5px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  background-image: url('./components/images/nature-edited.jpg');
-  height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
-}
 
 button{
   cursor: pointer;
@@ -227,5 +246,6 @@ button{
 a{
   text-decoration: none;
   cursor: default;
+  color: white;
 }
 </style>

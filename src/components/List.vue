@@ -1,6 +1,9 @@
 <template>
     <div class="root">
 
+
+
+
         <div class="sortButtons">
             <button :class="latestIsActive" @click="sortByThis('latest')">Latest</button>
             <button :class="activityIsActive" @click="sortByThis('activity')">Activity</button>
@@ -10,6 +13,7 @@
             <button :class="scoreIsActive" @click="sortByThis('score')">Score</button>
         </div>
 
+    <div class = "scroll-list">
         <div v-for="activity in sortList" class="activityCard" :key="activity.activity">
             <div>
                 <h3>{{activity.activity}}</h3>
@@ -24,7 +28,7 @@
                 <label for="score">Rate activity: </label>
 
 
-                
+
                 <select @change="updateUserScore" name="score" id="submitScore" @click="scoreIsClicked=true">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -36,6 +40,8 @@
                 <p class="score"> <span class="score">Score: </span> {{activity.score}}</p>
             </div>
         </div>
+    </div>
+
 
     </div>
 </template>
@@ -238,11 +244,24 @@ export default {
         border-bottom: 2px solid grey;
         margin-bottom: .5rem;
         background-color:#465F6F;
+        opacity: 87%;
         color:white;
         display: flex;
         justify-content: space-between;
 
     }
+
+    .scroll-list {
+
+        overflow: auto;
+        max-height: 750px;
+        min-height: 250px;
+        margin: 0px 20px 0px 20px;
+
+
+    }
+
+
     div.activityCard div:first-child{
         border: 2px solid red;
     }
@@ -273,7 +292,7 @@ export default {
         padding: .2rem 2rem .2rem;
         align-items: center;
         justify-content: space-evenly;
-      
+
 
     }
     p.score,
@@ -294,6 +313,14 @@ export default {
         padding: .5rem;
         cursor: pointer;
     }
+
+.sortButtons {
+
+     margin-left: 20px;
+
+}
+
+
     .sortButtons > button{
         background-color:#96BB53;
         padding:0.5em;
@@ -306,6 +333,19 @@ export default {
         background-color: #EFC748;
     }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(102, 102, 102);
+}
+
+
+::-webkit-scrollbar-thumb {
+  /* background: #888;  */
+  background: transparent;
+}
 
 
 </style>
