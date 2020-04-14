@@ -131,8 +131,11 @@ export default {
       this.activityList=JSON.parse(localStorage.getItem("activityList"))
     }
 
-   
+  },
+  updated(){
+    console.log("I updated");
     
+    localStorage.setItem("activityList", JSON.stringify(this.activityList))
 
   }
 
