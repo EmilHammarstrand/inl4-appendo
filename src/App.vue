@@ -32,8 +32,9 @@
         />
       </div>
 
+
       <a href="#toTop" id="toTopButton">
-        <button class="btn btn-info">To Top</button>
+        <button class="btn btn-info btn-lg">To Top</button>
       </a>
 
       <div class="form-div" id="formdiv-scroll">
@@ -157,7 +158,7 @@ export default {
   background-attachment: fixed;
   z-index: -1;
   overflow: auto;
-} 
+}
 
 
 .getstarted {
@@ -196,6 +197,8 @@ p {
 
 .form-div {
   text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
 }
 
 button {
@@ -212,5 +215,24 @@ a {
 #toTopButton {
   float: right;
   margin-right: 20px;
+  margin-top: 15px;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(134, 140, 143);
+}
+
+::-webkit-scrollbar-thumb {
+
+  background: rgb(42, 41, 41);
+}
+
+
+
+
 </style>
