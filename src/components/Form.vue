@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            <button class = "btn btn-warning btn-md" :disabled="!isCompleted || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity); postActivityBtn(); "> Save</button>
+            <button class = "btn btn-warning btn-md" :disabled="!isCompleted || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity); postActivityBtn(); "> Post</button>
             <span v-if="duplicate" class="error"> {{ duplicateErrorMessage }} </span>
         </div>
 

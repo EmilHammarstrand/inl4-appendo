@@ -24,7 +24,7 @@
                 <label for="score">Rate activity: </label>
 
 
-                
+
                 <select @change="updateUserScore" name="score" id="submitScore">
                     <option value="1">1</option>
                     <option value="2">2</option>

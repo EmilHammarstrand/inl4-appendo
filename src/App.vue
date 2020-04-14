@@ -145,6 +145,8 @@ body {
 .getstarted {
 
   margin-top: 150px;
+
+
 }
 
 .add-activity {
