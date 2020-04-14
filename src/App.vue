@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <a id="anchor2"></a>
     <button><a href="#anchor">Add activity</a></button>
     <Home />
     <List @emitDelete="deleteItem($event)"
@@ -7,6 +8,7 @@
     :activityList="activityList"/>
     <Form :activityList="activityList"/>
     <a id="anchor"></a>
+    <button><a href="#anchor2">To the top</a></button>
   </div>
 </template>
 

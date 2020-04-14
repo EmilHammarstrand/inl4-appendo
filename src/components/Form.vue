@@ -115,28 +115,6 @@ export default {
 
     methods: {
 
-        /* tipsterAnonym(){
-            if(this.name == ""){
-                this.activityList.push({
-                    activity: this.activity,
-                category: this.selected,
-                score: "5",
-                tipster: "Anonymous",
-                estimatedTime: this.estimatedTime,
-                date: this.todaysDate
-                })
-            }else{
-                this.activityList.push({
-                activity: this.activity,
-                category: this.selected,
-                score: "5",
-                tipster: this.name,
-                estimatedTime: this.estimatedTime,
-                date: this.todaysDate
-            });
-            }
-        }, */
-
         postActivityBtn(){
             
             if(this.name == ""){
