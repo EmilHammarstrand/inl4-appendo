@@ -24,7 +24,7 @@
                 <label for="score">Rate activity: </label>
 
 
-                
+
                 <select @change="updateUserScore" name="score" id="submitScore">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -296,7 +296,7 @@ export default {
         background-color:#96BB53;
         padding:0.5em;
         border:1px solid white;
-        border-radius:0.5em;
+        /*border-radius:0.5em;*/
 
     }
 

@@ -1,7 +1,7 @@
 <template>
 
   <div id="app">
-    
+
     <div class = "intro-text">
       <h1>AppenDo</h1>
       <p>Glued to the computer during break? AppenDo helps you to break FREE</p>
@@ -9,7 +9,7 @@
     </div>
 
 <div class = "showing-whole-form" v-if="showlistapp">
-<!-- <a href="anchor">To the bottom</a> -->
+<a href="anchor">To the bottom</a>
     <button class = "btn btn-lg btn-primary add-activity" @click="form()" v-if="showlistapp">Add activity</button>
     <Home v-if="false" />
 
@@ -17,9 +17,9 @@
       <List v-if="showlistapp" @emitDelete="deleteItem($event)"
       @rateActivity="rateActivity($event)"
       :activityList="activityList"/>
-      
+
     </div>
-<!-- <a id="anchor">qwe</a> -->
+<a id="anchor">To the Top</a>
       <div class = "form-div">
 
       <Form :activityList="activityList"/>
@@ -124,9 +124,10 @@ export default {
 
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
+
 body {
 
-  background-image: url('./components/images/nature-pic.jpg');
+  background-image: url('./components/images/nature-edited.jpg');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -138,6 +139,17 @@ body {
 .getstarted {
 
   margin-top: 150px;
+  font-size: 1.2rem;
+
+
+}
+
+
+
+p {
+
+font-size: 1.5rem;
+
 }
 
 .add-activity {
@@ -161,18 +173,26 @@ float: right;
   margin: 0px 20px 20px 20px;
 
 }
+
+.intro-text > h1 {
+
+  font-size: 5rem;
+}
+
 .form-div {
+
 text-align: center;
 
 }
 
 #app {
+
   font-family: 'Quicksand', sans-serif;
   letter-spacing: 0.5px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  background-image: url('./components/images/nature-pic.jpg');
+  background-image: url('./components/images/nature-edited.jpg');
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
