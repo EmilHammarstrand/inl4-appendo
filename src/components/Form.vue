@@ -195,7 +195,7 @@ export default {
         font-family: Quicksand;
     }
     label{
-        color: black;
+        color:white;
     }
     input{
         color: black;
