@@ -5,7 +5,7 @@
     <div class = "intro-text">
       <h1>AppenDo</h1>
       <p>Glued to the computer during break? AppenDo helps you to break FREE</p>
-      <button class = "btn btn-lg btn-primary getstarted" @click="getStarted()" v-if="!showlistapp">Get Started</button>
+      <button class = "btn btn-lg btn-info getstarted" @click="getStarted()" v-if="!showlistapp">Get Started</button>
     </div>
 
 <div class = "showing-whole-form" v-if="showlistapp">
@@ -19,12 +19,15 @@
       :activityList="activityList"/>
 
     </div>
-<a id="anchor">To the Top</a>
+
       <div class = "form-div">
 
       <Form :activityList="activityList"/>
 
+
       </div>
+
+      <a id="anchor">To the Top</a>
 
   </div>
   </div>
@@ -143,7 +146,7 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
 
-body {
+/* body {
 
   background-image: url('./components/images/nature-edited.jpg');
   -webkit-background-size: cover;
@@ -155,13 +158,41 @@ body {
   background-position: right;
   height: 100vh;
 
+} */
+
+#app {
+
+  font-family: 'Quicksand', sans-serif;
+  letter-spacing: 0.5px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  background-image: url('./components/images/nature-edited.jpg');
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-attachment: fixed;
+  z-index: -1;
+  overflow: auto;
+
+
+
+
 }
+
+
+
 
 .getstarted {
 
-  margin-top: 150px;
+  margin-top: 83px;
   font-size: 1.2rem;
-
+  width: 200px;
+  height: 87px;
 
 }
 
@@ -206,22 +237,6 @@ text-align: center;
 
 }
 
-#app {
-
-  font-family: 'Quicksand', sans-serif;
-  letter-spacing: 0.5px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  background-image: url('./components/images/nature-edited.jpg');
-  height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  z-index: -1;
-
-
-}
 
 button{
   cursor: pointer;
