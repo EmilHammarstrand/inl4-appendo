@@ -141,6 +141,7 @@ export default {
                 tipster: this.name,
                 estimatedTime: this.estimatedTime,
                 date: this.todaysDate
+<<<<<<< HEAD
             })}
 
             this.name = "";
@@ -151,6 +152,13 @@ export default {
             this.categoryIsTouched = false;
             this.timeIsTouched = false;
 
+=======
+            })
+
+            
+
+            }
+>>>>>>> karin-develop
         },
 
         findDuplicate(activity){

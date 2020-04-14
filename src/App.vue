@@ -113,6 +113,24 @@ export default {
     }
 
   },
+  mounted(){
+
+    if (localStorage.length==1){
+
+      localStorage.setItem("activityList", JSON.stringify(this.activityList))
+    }
+    else{
+
+      this.activityList=JSON.parse(localStorage.getItem("activityList"))
+    }
+
+  },
+  updated(){
+    console.log("I updated");
+    
+    localStorage.setItem("activityList", JSON.stringify(this.activityList))
+
+  }
 
 
 

@@ -24,15 +24,20 @@
                 <label for="score">Rate activity: </label>
 
 
+<<<<<<< HEAD
 
                 <select @change="updateUserScore" name="score" id="submitScore">
+=======
+                
+                <select @change="updateUserScore" name="score" id="submitScore" @click="scoreIsClicked=true">
+>>>>>>> karin-develop
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option selected="selected" value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                <button @click="rateActivity(activity.activity)">Submit</button>
+                <button @click="rateActivity(activity.activity)" :disabled="!scoreIsClicked">Submit</button>
                 <p class="score"> <span class="score">Score: </span> {{activity.score}}</p>
             </div>
         </div>
@@ -58,7 +63,8 @@ export default {
         tipsterActive: false,
         estimatedTimeActive: false,
         scoreActive: false,
-        userScore: 3
+        userScore: 3,
+        scoreIsClicked:false
 
     }),
     computed:{
