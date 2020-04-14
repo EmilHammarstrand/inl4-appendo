@@ -1,22 +1,23 @@
 <template>
     <div class="root">
 
+        <span v-if="showSuccessMessage" class="successMessage" >{{successMessage}}</span>
+
         <div class="form-group">
-            <label for="activity">  Activity: </label> <br />
+            <label for="activity"> Activity:</label> <br />
             <input type="text" placeholder="A short suggestion..." name="activity" v-model="activity" :class="activityClass" @click="activityIsTouched = true" >
-        <span v-if="!activityIsValid && activityIsTouched" class="error"> {{ activityErrorMessage }} </span>
+            <span v-if="!activityIsValid && activityIsTouched" class="error"> {{ activityErrorMessage }} </span>
         </div>
 
 
         <div class="form-group">
-            <label for="name">Tipster: <span id="opt">(opt.)</span></label> <br />
+            <label for="name"> Tipster: <span id="opt">(opt.)</span></label> <br />
             <input type="text" name="name" placeholder="Enter your name..." v-model="name">
-            <!-- <span v-if="nameIsTouched && !nameIsValid" class="error"> {{ nameErrorMessage }} </span> -->
         </div>
 
 
         <div class="form-group">
-            <label for="dropdown">  Category: </label> <br />
+            <label for="dropdown"> Category:</label> <br />
              <select name="dropdown" class="categoryButton" v-model="selected" :class="categoryClass" @click="categoryIsTouched = true">
                 <option>Relax</option>
                 <option>Food</option>
@@ -27,16 +28,15 @@
         </div>
 
         <div class="form-group">
-            <label for="estimatedTime">  Estimated minutes: </label> <br />
+            <label for="estimatedTime"> Estimated minutes:</label> <br />
             <input class="estTime" name="estimatedTime" type="number" v-model="estimatedTime" min="3" max="15" :class="timeClass" @click="timeIsTouched = true" >
             <span v-if="!timeIsValid && timeIsTouched" class="error"> {{ timeErrorMessage }} </span>
         </div>
 
         <div class="form-group">
-            <button class = "btn btn-warning btn-md" :disabled="!isCompleted || !activityIsValid || categoryIsValid || !timeIsValid" @click="formResult = true; findDuplicate(activity);  ">Post</button>
+            <button class = "btn btn-warning btn-md" :disabled="!isCompleted || !activityIsValid || categoryIsValid || !timeIsValid" @click="findDuplicate(activity);">Post</button>
             <span v-if="duplicate" class="error"> {{ duplicateErrorMessage }} </span>
-        </div>
-
+        </div> 
     </div>
 </template>
 
@@ -54,12 +54,11 @@ export default {
         activity: "",
         selected: "",
         estimatedTime: "",
-        /* nameIsTouched: false, */
         activityIsTouched: false,
         categoryIsTouched: false,
         timeIsTouched: false,
-        formResult: false,
-        duplicate: false
+        duplicate: false,
+        showSuccessMessage: false
     }),
 
     props: {
@@ -67,19 +66,13 @@ export default {
     },
 
     computed: {
-        /* nameErrorMessage(){
-            return "Please enter at least two characters."
-        }, */
+
+        successMessage(){
+            return "Your activity was posted successfully."
+        },
         duplicateErrorMessage(){
             return "You cant post duplicates, try writing another activity."
         },
-        /* nameIsValid() {
-            return this.name.length >= 2;
-        } */
-        /* nameClass() {
-			if( !this.nameIsTouched ) return '';
-			return this.nameIsValid ? 'valid' : 'invalid';
-        }, */
         categoryIsValid() {
             return this.selected == 0;
         },
@@ -118,7 +111,7 @@ export default {
         timeClass() {
 			if( !this.timeIsTouched ) return '';
 			return this.timeIsValid ? 'valid' : 'invalid';
-        },
+        }
     },
 
     methods: {
@@ -143,6 +136,7 @@ export default {
                 date: this.todaysDate
             })}
 
+
             this.name = "";
             this.selected = 0;
             this.activity = "";
@@ -151,6 +145,7 @@ export default {
             this.categoryIsTouched = false;
             this.timeIsTouched = false;
 
+            this.showSuccessMessage = true;
         },
 
         findDuplicate(activity){
@@ -200,11 +195,17 @@ export default {
     }
     .categoryButton {
         width: 174px;
-
     }
     #opt {
         opacity: 80%;
         font-size: 75%;
     }
+
+    .successMessage{
+        color: green;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
 
 </style>
