@@ -157,7 +157,8 @@ export default {
   background-attachment: fixed;
   z-index: -1;
   overflow: auto;
-}
+} */
+
 
 .getstarted {
   margin-top: 83px;
