@@ -124,7 +124,7 @@ export default {
 
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
-body {
+/* body {
 
   background-image: url('./components/images/nature-pic.jpg');
   -webkit-background-size: cover;
@@ -133,7 +133,7 @@ body {
   -o-background-size: cover;
   background: no-repeat;
 
-}
+} */
 
 .getstarted {
 
@@ -176,10 +176,7 @@ text-align: center;
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
   z-index: -1;
-
-
 }
 
 button{

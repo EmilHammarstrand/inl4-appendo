@@ -184,13 +184,11 @@ export default {
     }
     .form-group{
         margin: 1em;
-
     }
     .estTime{
         width: 174px;
 
     }
-
     label, input, button, option{
         font-family: Quicksand;
     }
@@ -204,11 +202,6 @@ export default {
         width: 174px;
 
     }
-
-    body{
-        background-color: #2F4858;
-    }
-
     #opt {
         opacity: 80%;
         font-size: 75%;
