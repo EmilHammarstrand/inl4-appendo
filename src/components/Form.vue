@@ -9,7 +9,7 @@
 
 
         <div class="form-group">
-            <label for="name">Tipser: <span id="opt">(opt.)</span></label> <br />
+            <label for="name">Tipster: <span id="opt">(opt.)</span></label> <br />
             <input type="text" name="name" placeholder="Enter your name..." v-model="name">
             <!-- <span v-if="nameIsTouched && !nameIsValid" class="error"> {{ nameErrorMessage }} </span> -->
         </div>
