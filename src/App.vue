@@ -146,19 +146,6 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
 
-/* body {
-
-  background-image: url('./components/images/nature-edited.jpg');
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: right;
-  height: 100vh;
-
-} */
 
 #app {
 
