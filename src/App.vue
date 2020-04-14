@@ -9,7 +9,7 @@
     </div>
 
 <div class = "showing-whole-form" v-if="showlistapp">
-
+<a href="anchor">To the bottom</a>
     <button class = "btn btn-lg btn-primary add-activity" @click="form()" v-if="showlistapp">Add activity</button>
     <Home v-if="false" />
 
@@ -17,8 +17,9 @@
       <List v-if="showlistapp" @emitDelete="deleteItem($event)"
       @rateActivity="rateActivity($event)"
       :activityList="activityList"/>
-    </div>
 
+    </div>
+<a id="anchor">qwe</a>
       <div class = "form-div">
 
       <Form :activityList="activityList"/>
@@ -26,7 +27,6 @@
       </div>
 
   </div>
-    <!--<a id="anchor"></a>-->
   </div>
 </template>
 
@@ -34,13 +34,6 @@
 
 <script>
 
-/*
-import Vue from 'vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
-*/
 
 import Form from "./components/Form"
 import Home from "./components/Home"
