@@ -19,7 +19,7 @@
       :activityList="activityList"/>
 
     </div>
-<a id="anchor">qwe</a>
+<a id="anchor">To the Top</a>
       <div class = "form-div">
 
       <Form :activityList="activityList"/>
@@ -139,7 +139,16 @@ body {
 .getstarted {
 
   margin-top: 150px;
+  font-size: 1.2rem;
 
+
+}
+
+
+
+p {
+
+font-size: 1.5rem;
 
 }
 
@@ -164,7 +173,14 @@ float: right;
   margin: 0px 20px 20px 20px;
 
 }
+
+.intro-text > h1 {
+
+  font-size: 5rem;
+}
+
 .form-div {
+
 text-align: center;
 
 }
