@@ -3,6 +3,9 @@
 
         <span v-if="showSuccessMessage" class="successMessage" >{{successMessage}}</span>
 
+
+
+
         <div class="form-group">
             <label for="activity"> Activity:</label> <br />
             <input type="text" placeholder="A short suggestion..." name="activity" v-model="activity" :class="activityClass" @click="activityIsTouched = true" >
@@ -36,7 +39,7 @@
         <div class="form-group">
             <button class = "btn btn-warning btn-md" :disabled="!isCompleted || !activityIsValid || categoryIsValid || !timeIsValid" @click="findDuplicate(activity);">Post</button>
             <span v-if="duplicate" class="error"> {{ duplicateErrorMessage }} </span>
-        </div> 
+        </div>
     </div>
 </template>
 
@@ -173,15 +176,17 @@ export default {
     select.invalid { border-color: green; }
 
     .error{
-        color: red;
+        color: #ff0000db;
         display:block;
         font-weight: 600;
+        font-size: 18px;
+
     }
     .form-group{
         margin: 1em;
     }
     .estTime{
-        width: 174px;
+        width: 186px;
 
     }
     label, input, button, option{
@@ -192,9 +197,17 @@ export default {
     }
     input{
         color: black;
+        padding: 5px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        resize: vertical;
     }
     .categoryButton {
-        width: 174px;
+        width: 186px;
+        padding: 5px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        resize: vertical;
     }
     #opt {
         opacity: 80%;
@@ -202,9 +215,10 @@ export default {
     }
 
     .successMessage{
-        color: green;
+        color: chartreuse;
         font-size: 20px;
         font-weight: 600;
+
     }
 
 
