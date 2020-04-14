@@ -20,7 +20,7 @@
             </div>
 
             <div class="optionDiv">
-                <img @click="emitDelete(activity.activity)" src="../assets/garbage.png" alt="delete" class="delete">
+                <img @click="emitDelete(activity.activity)" src="../assets/trash.png" alt="delete" class="delete">
                 <label for="score">Rate activity: </label>
 
 
@@ -272,6 +272,7 @@ export default {
         padding: .2rem 2rem .2rem;
         align-items: center;
         justify-content: space-evenly;
+      
 
     }
     p.score,
