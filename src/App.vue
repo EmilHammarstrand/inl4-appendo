@@ -8,17 +8,22 @@
       <button class = "btn btn-lg btn-primary getstarted" @click="getStarted()" v-if="!showlistapp">Get Started</button>
     </div>
 
+<div class = "showing-whole-form" v-if="showlistapp">
+
     <button class = "btn btn-lg btn-primary add-activity" @click="form()" v-if="showlistapp">Add activity</button>
     <Home v-if="false" />
+
     <div>
       <List v-if="showlistapp" @emitDelete="deleteItem($event)"
-    @rateActivity="rateActivity($event)"
-    :activityList="activityList"/>
+      @rateActivity="rateActivity($event)"
+      :activityList="activityList"/>
     </div>
 
-  <div class = "form-div" v-if="showform">
+      <div class = "form-div">
 
-    <Form :activityList="activityList"/>
+      <Form :activityList="activityList"/>
+
+      </div>
 
   </div>
     <!--<a id="anchor"></a>-->
