@@ -24,13 +24,8 @@
                 <label for="score">Rate activity: </label>
 
 
-<<<<<<< HEAD
-
-                <select @change="updateUserScore" name="score" id="submitScore">
-=======
                 
                 <select @change="updateUserScore" name="score" id="submitScore" @click="scoreIsClicked=true">
->>>>>>> karin-develop
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option selected="selected" value="3">3</option>
