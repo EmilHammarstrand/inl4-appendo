@@ -237,6 +237,7 @@ export default {
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Baloo+Paaji+2&display=swap');
     *{
         font-family:'Quicksand', sans-serif;
     }
@@ -269,6 +270,7 @@ p.score {
 
     span{
         font-weight: 600;
+
     }
     h3{
         padding-top:0.5em;
@@ -278,6 +280,7 @@ p.score {
     }
     p{
        margin: .3rem .3rem .3rem .5rem;
+       font-size: 1rem;
 
     }
     p.created,
@@ -287,10 +290,11 @@ p.score {
     .optionDiv{
         display: flex;
         flex-direction: column;
-        width: 11rem;
-        padding: .2rem 2rem .2rem;
+        width: min-content;
+        padding: .2rem .2rem .2rem;
         align-items: center;
         justify-content: space-evenly;
+        text-align: center;
 
 
     }
