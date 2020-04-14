@@ -2,7 +2,8 @@
   <div id="app">
     <div class="intro-text" id="toTop">
       <h1>AppenDo</h1>
-      <p>Glued to the computer during break? AppenDo helps you to break FREE</p>
+      <p v-if="!showlistapp">Glued to the computer during break? AppenDo helps you to break FREE</p>
+      <p v-if="showlistapp">Create your activity:</p>
       <button
         class="btn btn-lg btn-info getstarted"
         @click="getStarted()"
@@ -34,7 +35,7 @@
 
 
       <a href="#toTop" id="toTopButton">
-        <button class="btn btn-info btn-lg">To Top</button>
+        <button class="btn btn-info btn-lg">Go Back Up</button>
       </a>
 
       <div class="form-div" id="formdiv-scroll">
@@ -175,6 +176,7 @@ p {
 .add-activity {
   float: right;
   margin-right: 20px;
+  margin-bottom: 15px;
 }
 
 * {
@@ -197,7 +199,7 @@ p {
 
 .form-div {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 60px;
   padding-top: 20px;
 }
 

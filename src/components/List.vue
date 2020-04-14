@@ -256,14 +256,16 @@ export default {
         max-height: 750px;
         min-height: 250px;
         margin: 0px 20px 0px 20px;
+        border-bottom-left-radius: 15px;
 
 
     }
 
 
-    div.activityCard div:first-child{
-        border: 2px solid red;
-    }
+p.score {
+
+    display: inline-flex;
+}
 
     span{
         font-weight: 600;
@@ -301,9 +303,28 @@ export default {
     }
     .optionDiv button{
         width: 4rem;
-        padding: .2rem;
         margin-top: .3rem;
+        border-radius: 4px;
+        border: none;
+        padding: 5px;
+        color: black;
+        background-color: #17a2b8;
+        font-weight: bold;
     }
+
+    .optionDiv select{
+        width: 4rem;
+        padding: 5px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        resize: vertical;
+        margin-top: .3rem;
+
+
+    }
+
+
+
     img.delete{
         object-fit: scale-down;
         height: 3rem;
