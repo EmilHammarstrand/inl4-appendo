@@ -142,7 +142,7 @@ export default {
                 estimatedTime: this.estimatedTime,
                 date: this.todaysDate
             })}
-            
+
             this.name = "";
             this.selected = 0;
             this.activity = "";
