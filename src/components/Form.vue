@@ -1,10 +1,7 @@
 <template>
-    <div class="root asd">
+    <div class="root rootTwo">
 
         <span v-if="showSuccessMessage" class="successMessage" >{{successMessage}}</span>
-
-
-
 
         <div class="form-group">
             <label for="activity"> Activity:</label> <br />
@@ -12,12 +9,10 @@
             <span v-if="!activityIsValid && activityIsTouched" class="error"> {{ activityErrorMessage }} </span>
         </div>
 
-
         <div class="form-group">
             <label for="name"> Tipster: <span id="opt">(opt.)</span></label> <br />
             <input type="text" name="name" placeholder="Enter your name..." v-model="name">
         </div>
-
 
         <div class="form-group">
             <label for="dropdown"> Category:</label> <br />
@@ -87,8 +82,8 @@ export default {
             return "Must be between 2-20 characters."
         },
         activityIsValid() {
-            let asd = this.activity.length <= 20 && this.activity.length >= 2;
-            return asd;
+            let activitylength = this.activity.length <= 20 && this.activity.length >= 2;
+            return activitylength;
         },
         activityClass() {
 			if( !this.activityIsTouched ) return '';
@@ -139,7 +134,6 @@ export default {
                 date: this.todaysDate
             })}
 
-
             this.name = "";
             this.selected = 0;
             this.activity = "";
@@ -161,10 +155,7 @@ export default {
             }
         }
     }
-
-
-
-}
+};
 
 </script>
 
@@ -225,9 +216,7 @@ export default {
 
     }
 
-
-
-    .asd div {
+    .rootTwo div {
         position: relative
     }
 
