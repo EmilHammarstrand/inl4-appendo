@@ -6,7 +6,7 @@
       <button :class="categoryIsActive" @click="sortByThis('category')">Category</button>
       <button :class="tipsterIsActive" @click="sortByThis('tipster')">Tipster</button>
       <button :class="estimatedTimeIsActive" @click="sortByThis('estimatedTime')">Time</button>
-      <button :class="scoreIsActive" @click="sortByThis('score')">Score</button> 
+      <button :class="scoreIsActive" @click="sortByThis('score')">Score</button>
     </div>
 
     <div class="scroll-list">
@@ -255,12 +255,16 @@ div.activityCard {
   color: white;
   display: flex;
   justify-content: space-between;
-  
+
 }
+
+
+
 
 div.activityCard:nth-child(odd){
   border-right: 1px solid grey;
 }
+
 
 .scroll-list {
   overflow-y: scroll;
@@ -273,7 +277,12 @@ div.activityCard:nth-child(odd){
   opacity: 87%;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
+
+
+
 }
+
+
 
 .scroll-list::-webkit-scrollbar {
   width: 0px;
@@ -302,11 +311,15 @@ h3 {
 p {
   margin: 0.3rem 0.3rem 0.3rem 0.5rem;
   font-size: 1rem;
+
+
 }
 
 p.created,
 span.created {
   font-size: 0.7rem;
+
+
 }
 .optionDiv {
   display: flex;
@@ -317,26 +330,28 @@ span.created {
   justify-content: space-evenly;
   text-align: center;
   margin-right: 2em;
+
 }
 
 p.score,
 span.score {
   padding-right: 0.6rem;
+
 }
 select {
   margin-top: 0.3rem;
 }
-.optionDiv > .scoreSubmitButton {
+.scoreSubmitButton {
   width: 4rem;
   margin-top: 0.3rem;
   border-radius: 4px;
   border: none;
   padding: 5px;
-  color: black;
+  color: white;
   background-color: #17a2b8;
   font-weight: bold;
 }
-.optionDiv > .scoreSubmitButton:disabled{
+.scoreSubmitButton:disabled{
   background-color:grey;
   color:rgb(73, 73, 73);
   cursor: not-allowed
@@ -349,6 +364,7 @@ select {
   border-radius: 4px;
   resize: vertical;
   margin-top: 0.3rem;
+
 }
 
 img.delete {
@@ -443,14 +459,59 @@ p.score {
 
 .items{
   margin-left: 2em;
+
 }
+
+
 
 .y {
   display: flex;
   flex-direction: column;
   width: 90vw;
   margin: 0 auto;
+
 }
+
+
+
+@keyframes scale-in-hor-left {
+  0% {
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+    -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+    -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+    opacity: 1;
+  }
+}
+
+
+
+@keyframes puff-in-center {
+  0% {
+    -webkit-transform: scale(2);
+            transform: scale(2);
+    -webkit-filter: blur(4px);
+            filter: blur(4px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+
+
 
 
 /* @media (max-width: 769px) {

@@ -128,7 +128,7 @@ export default {
     }
   },
   mounted() {
- 
+
     if (localStorage.length <= 1 ) {
       localStorage.setItem("activityList", JSON.stringify(this.activityList));
     }
@@ -168,13 +168,21 @@ export default {
   z-index: -1;
   overflow: auto;
 }
+
+
+
+
 .goBackButton {
 
   height: 40px;
   width: 40;
   margin-left: 20px;
   cursor: pointer;
+
+
+
 }
+
 
 
 .getstarted {
@@ -182,6 +190,8 @@ export default {
   font-size: 1.2rem;
   width: 200px;
   height: 87px;
+  animation: puff-in-center;
+  animation-duration: 0.5s;
 }
 
 p {
@@ -210,6 +220,9 @@ p {
 
 .intro-text > h1 {
   font-size: 5rem;
+
+
+
 }
 
 .form-div {
@@ -277,6 +290,24 @@ a {
 }
 
 
+}
+
+/* just a test */
+@keyframes puff-in-center {
+  0% {
+    -webkit-transform: scale(2);
+            transform: scale(2);
+    -webkit-filter: blur(4px);
+            filter: blur(4px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
 }
 
 
