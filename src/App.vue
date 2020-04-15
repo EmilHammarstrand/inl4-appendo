@@ -210,8 +210,7 @@ p {
   color: white;
   text-align: center;
   padding: 30px;
-  margin: 0px 20px 20px 20px;
-
+  margin: 20px 0px 0px 0px;
 }
 
 .intro-text > h1 {
@@ -265,6 +264,19 @@ a {
 
 
 }
+
+@media(max-width: 320px) {
+
+.intro-text > h1 {
+  text-align: center;
+  font-size: 50px;
+  border: 2px solid green;
+}
+
+
+}
+
+
 
 @media(max-width: 786px) {
 

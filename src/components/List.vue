@@ -38,6 +38,8 @@
             alt="delete"
             class="delete"
           />
+
+          <div class="ratePart">
           <label for="score">Rate activity:</label>
 
           <select
@@ -57,8 +59,7 @@
             <span class="score">Score:</span>
             {{activity.score}}
           </p>
-          <!-- ändrat här! -->
-          <p>{{scoreIsClicked}}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -257,9 +258,17 @@ div.activityCard {
 
 }
 
+/* testing psuedo */
+.activityCard .items {
+  animation: scale-in-hor-left;
+  animation-duration: 0.2s;
+}
+
+
 div.activityCard:nth-child(odd){
   border-right: 1px solid grey;
 }
+
 
 .scroll-list {
   overflow-y: scroll;
@@ -272,7 +281,12 @@ div.activityCard:nth-child(odd){
   opacity: 87%;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
+
+
+
 }
+
+
 
 .scroll-list::-webkit-scrollbar {
   width: 0px;
@@ -283,8 +297,15 @@ p.score {
   display: inline-flex;
 }
 
+
 span {
   font-weight: 600;
+}
+
+label {
+  margin-top: 1.5em;
+  margin-bottom: 0rem;
+  white-space: nowrap;
 }
 h3 {
   padding-top: 0.5em;
@@ -294,10 +315,15 @@ h3 {
 p {
   margin: 0.3rem 0.3rem 0.3rem 0.5rem;
   font-size: 1rem;
+
+
 }
+
 p.created,
 span.created {
   font-size: 0.7rem;
+
+
 }
 .optionDiv {
   display: flex;
@@ -308,26 +334,28 @@ span.created {
   justify-content: space-evenly;
   text-align: center;
   margin-right: 2em;
+
 }
 
 p.score,
 span.score {
   padding-right: 0.6rem;
+
 }
 select {
   margin-top: 0.3rem;
 }
-.optionDiv > .scoreSubmitButton {
+.scoreSubmitButton {
   width: 4rem;
   margin-top: 0.3rem;
   border-radius: 4px;
   border: none;
   padding: 5px;
-  color: black;
+  color: white;
   background-color: #17a2b8;
   font-weight: bold;
 }
-.optionDiv > .scoreSubmitButton:disabled{
+.scoreSubmitButton:disabled{
   background-color:grey;
   color:rgb(73, 73, 73);
   cursor: not-allowed
@@ -340,12 +368,14 @@ select {
   border-radius: 4px;
   resize: vertical;
   margin-top: 0.3rem;
+
 }
 
 img.delete {
   object-fit: scale-down;
   height: 3rem;
-  padding: 0.5rem;
+  margin-top: 1.2em;
+  /* padding: 0.5rem; */
   cursor: pointer;
 }
 
@@ -388,19 +418,101 @@ img.delete {
 
 }
 
+@media(max-width: 540px) {
+
+button{
+  font-size: 70%;
+}
+
+p.score {
+  display: inline-flex;
+  margin-left: 0px;
+}
+
+.activityCard{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.ratePart{
+  display: flex;
+  flex-direction: column;
+}
+
+.optionDiv {
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+}
+
+.sortButtons > button {
+  background-color: #96bb53;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border: 1px solid rgba(117, 114, 114, 0.185);
+  width: 16.66%;
+  opacity: 95%;
+  /*border-radius:0.5em;*/
+  font-weight: bold;
+}
+
+
+
+}
+
 .items{
   margin-left: 2em;
+
 }
+
+
 
 .y {
   display: flex;
   flex-direction: column;
   width: 90vw;
   margin: 0 auto;
+
 }
 
 
 
+@keyframes scale-in-hor-left {
+  0% {
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+    -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+    -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+    opacity: 1;
+  }
+}
+
+
+
+@keyframes puff-in-center {
+  0% {
+    -webkit-transform: scale(2);
+            transform: scale(2);
+    -webkit-filter: blur(4px);
+            filter: blur(4px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
 
 
 
