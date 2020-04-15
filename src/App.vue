@@ -230,10 +230,7 @@ a {
   margin-top: 15px;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
 
-}
 
 ::-webkit-scrollbar-track {
   background: rgb(134, 140, 143);

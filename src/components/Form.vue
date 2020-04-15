@@ -1,5 +1,5 @@
 <template>
-    <div class="root">
+    <div class="root asd">
 
         <span v-if="showSuccessMessage" class="successMessage" >{{successMessage}}</span>
 
@@ -177,11 +177,13 @@ export default {
 
     .error{
         color: #ff0000db;
-        display:block;
+        display: inline-block;
         font-weight: 600;
         font-size: 18px;
-
+        position: absolute;
+        margin-left: 10px;
     }
+
     .form-group{
         margin: 1em;
     }
@@ -202,6 +204,7 @@ export default {
         border-radius: 4px;
         resize: vertical;
     }
+
     .categoryButton {
         width: 186px;
         padding: 5px;
@@ -209,6 +212,7 @@ export default {
         border-radius: 4px;
         resize: vertical;
     }
+
     #opt {
         opacity: 80%;
         font-size: 75%;
@@ -221,5 +225,10 @@ export default {
 
     }
 
+
+
+    .asd div {
+        position: relative
+    }
 
 </style>

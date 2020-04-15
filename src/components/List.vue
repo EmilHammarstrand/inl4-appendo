@@ -11,7 +11,7 @@
 
     <div class="scroll-list">
       <div v-for="activity in sortList" class="activityCard" :key="activity.activity">
-        <div>
+        <div class="items">
           <h3>{{activity.activity}}</h3>
           <p>
             <span>Category:</span>
@@ -252,6 +252,11 @@ div.activityCard {
   color: white;
   display: flex;
   justify-content: space-between;
+  
+}
+
+div.activityCard:nth-child(odd){
+  border-right: 1px solid grey;
 }
 
 .scroll-list {
@@ -260,6 +265,17 @@ div.activityCard {
   min-height: 250px;
   margin: 0px 20px 0px 20px;
   border-bottom-left-radius: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #465f6f;
+  opacity: 87%;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.scroll-list::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
 p.score {
@@ -290,7 +306,9 @@ span.created {
   align-items: center;
   justify-content: space-evenly;
   text-align: center;
+  margin-right: 2em;
 }
+
 p.score,
 span.score {
   padding-right: 0.6rem;
@@ -308,6 +326,8 @@ select {
   background-color: #17a2b8;
   font-weight: bold;
 }
+
+
 
 .optionDiv select {
   width: 4rem;
@@ -332,8 +352,9 @@ img.delete {
 .sortButtons > button {
   background-color: #96bb53;
   padding: 0.5em;
-  border: 1px solid white;
+  border: 1px solid rgba(117, 114, 114, 0.185);
   width: 16.46%;
+  opacity: 95%;
   /*border-radius:0.5em;*/
 }
 
@@ -362,6 +383,10 @@ img.delete {
     width: 15.86%;
     /*border-radius:0.5em;*/
   }
+}
+
+.items{
+  margin-left: 2em;
 }
 
 
