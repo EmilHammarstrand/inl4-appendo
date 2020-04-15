@@ -128,7 +128,7 @@ export default {
     }
   },
   mounted() {
- 
+
     if (localStorage.length <= 1 ) {
       localStorage.setItem("activityList", JSON.stringify(this.activityList));
     }
