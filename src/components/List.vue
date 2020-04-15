@@ -6,7 +6,7 @@
       <button :class="categoryIsActive" @click="sortByThis('category')">Category</button>
       <button :class="tipsterIsActive" @click="sortByThis('tipster')">Tipster</button>
       <button :class="estimatedTimeIsActive" @click="sortByThis('estimatedTime')">Time</button>
-      <button :class="scoreIsActive" @click="sortByThis('score')">Score</button>
+      <button :class="scoreIsActive" @click="sortByThis('score')">Score</button> 
     </div>
 
     <div class="scroll-list">
@@ -281,8 +281,15 @@ p.score {
   display: inline-flex;
 }
 
+
 span {
   font-weight: 600;
+}
+
+label {
+  margin-top: 1.5em;
+  margin-bottom: 0rem;
+  white-space: nowrap;
 }
 h3 {
   padding-top: 0.5em;
@@ -293,6 +300,7 @@ p {
   margin: 0.3rem 0.3rem 0.3rem 0.5rem;
   font-size: 1rem;
 }
+
 p.created,
 span.created {
   font-size: 0.7rem;
@@ -340,7 +348,8 @@ select {
 img.delete {
   object-fit: scale-down;
   height: 3rem;
-  padding: 0.5rem;
+  margin-top: 1.2em;
+  /* padding: 0.5rem; */
   cursor: pointer;
 }
 
@@ -380,6 +389,16 @@ img.delete {
   .scroll-list {
   grid-template-columns: 1fr;
 }
+
+}
+
+@media(max-width: 540px) {
+
+button{
+  font-size: 70%;
+}
+
+
 
 }
 

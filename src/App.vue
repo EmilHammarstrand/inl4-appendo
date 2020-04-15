@@ -250,6 +250,8 @@ a {
 
 }
 
+
+
 @media(max-width: 786px) {
 
 .intro-text > h1 {
