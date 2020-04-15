@@ -38,6 +38,8 @@
             alt="delete"
             class="delete"
           />
+
+          <div class="ratePart">
           <label for="score">Rate activity:</label>
 
           <select
@@ -57,6 +59,7 @@
             <span class="score">Score:</span>
             {{activity.score}}
           </p>
+          </div>
         </div>
       </div>
     </div>
@@ -396,6 +399,39 @@ img.delete {
 
 button{
   font-size: 70%;
+}
+
+p.score {
+  display: inline-flex;
+  margin-left: 0px;
+}
+
+.activityCard{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.ratePart{
+  display: flex;
+  flex-direction: column;
+}
+
+.optionDiv {
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+}
+
+.sortButtons > button {
+  background-color: #96bb53;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border: 1px solid rgba(117, 114, 114, 0.185);
+  width: 16.66%;
+  opacity: 95%;
+  /*border-radius:0.5em;*/
+  font-weight: bold;
 }
 
 
