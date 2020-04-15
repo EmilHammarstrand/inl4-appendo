@@ -54,6 +54,7 @@
 import Form from "./components/Form";
 import Home from "./components/Home";
 import List from "./components/List";
+
 export default {
   name: "App",
   components: {
@@ -68,7 +69,7 @@ export default {
     itemScoreDisabled:[],
     activityList: [
       {
-        activity: "Take a walk around the house",
+        activity: "Take a walk",
         category: "exercise",
         score: "3",
         tipster: "google",
@@ -142,13 +143,9 @@ export default {
       this.activityList = JSON.parse(localStorage.getItem("activityList"));
     }
 
-    for (let i=0; i<this.activityList.length; i++){
-    
-      
-      this.itemScoreDisabled.push(true)
-        
+    for (let i=0; i<this.activityList.length; i++){ 
+      this.itemScoreDisabled.push(true);
     }
-    console.log("I app/mounted, itemscoredisabled: ",this.itemScoreDisabled);
   },
   updated() {
     localStorage.setItem("activityList", JSON.stringify(this.activityList));
@@ -271,7 +268,6 @@ a {
 .intro-text > h1 {
   text-align: center;
   font-size: 50px;
-  border: 2px solid green;
 }
 
 
