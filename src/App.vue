@@ -32,7 +32,7 @@
           v-if="showlistapp"
           @emitDelete="deleteItem($event)"
           @rateActivity="rateActivity($event)"
-          :activityList="activityList"
+          :activityList="activityList" :itemScoreDisabled="itemScoreDisabled"
         />
       </div>
 
@@ -54,6 +54,7 @@
 import Form from "./components/Form";
 import Home from "./components/Home";
 import List from "./components/List";
+
 export default {
   name: "App",
   components: {
@@ -65,9 +66,10 @@ export default {
   data: () => ({
     showform: false,
     showlistapp: false,
+    itemScoreDisabled:[],
     activityList: [
       {
-        activity: "Take a walk around the house",
+        activity: "Take a walk",
         category: "exercise",
         score: "3",
         tipster: "google",
@@ -139,6 +141,10 @@ export default {
 
     else {
       this.activityList = JSON.parse(localStorage.getItem("activityList"));
+    }
+
+    for (let i=0; i<this.activityList.length; i++){ 
+      this.itemScoreDisabled.push(true);
     }
   },
   updated() {
@@ -275,7 +281,6 @@ a {
 .intro-text > h1 {
   text-align: center;
   font-size: 50px;
-  border: 2px solid green;
 }
 
 
