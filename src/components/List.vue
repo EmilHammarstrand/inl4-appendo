@@ -258,11 +258,7 @@ div.activityCard {
 
 }
 
-/* testing psuedo */
-.activityCard .items {
-  animation: scale-in-hor-left;
-  animation-duration: 0.2s;
-}
+
 
 
 div.activityCard:nth-child(odd){
