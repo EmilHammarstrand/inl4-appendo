@@ -32,7 +32,7 @@
           v-if="showlistapp"
           @emitDelete="deleteItem($event)"
           @rateActivity="rateActivity($event)"
-          :activityList="activityList"
+          :activityList="activityList" :itemScoreDisabled="itemScoreDisabled"
         />
       </div>
 
@@ -65,6 +65,7 @@ export default {
   data: () => ({
     showform: false,
     showlistapp: false,
+    itemScoreDisabled:[],
     activityList: [
       {
         activity: "Take a walk around the house",
@@ -140,6 +141,14 @@ export default {
     else {
       this.activityList = JSON.parse(localStorage.getItem("activityList"));
     }
+
+    for (let i=0; i<this.activityList.length; i++){
+    
+      
+      this.itemScoreDisabled.push(true)
+        
+    }
+    console.log("I app/mounted, itemscoredisabled: ",this.itemScoreDisabled);
   },
   updated() {
     localStorage.setItem("activityList", JSON.stringify(this.activityList));

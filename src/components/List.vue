@@ -10,7 +10,8 @@
     </div>
 
     <div class="scroll-list">
-      <div v-for="activity in sortList" class="activityCard" :key="activity.activity">
+      <div v-for="(activity, index) in sortList" 
+      class="activityCard" :key="activity.activity">
         <div class="items">
           <h3>{{activity.activity}}</h3>
           <p>
@@ -44,7 +45,7 @@
             @change="updateUserScore"
             name="score"
             id="submitScore"
-            @click="scoreIsClicked=true"
+            @click="scoreIsClicked(index)"
           >
             <option value="1">1</option>
             <option value="2">2</option>
@@ -52,13 +53,15 @@
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <button @click="rateActivity(activity.activity)" :disabled="!scoreIsClicked" class="scoreSubmitButton">Submit</button>
+          <button @click="rateActivity(activity.activity)" class="scoreSubmitButton" :disabled="itemScoreDisabled[index]">Submit</button>
           <p class="score">
             <span class="score">Score:</span>
             {{activity.score}}
+            {{itemScoreDisabled[index]}}
+            
           </p>
           <!-- ändrat här! -->
-          <p>{{scoreIsClicked}}</p>
+          <!-- <p>{{scoreIsClicked}}</p> -->
         </div>
       </div>
     </div>
@@ -82,7 +85,9 @@ export default {
     estimatedTimeActive: false,
     scoreActive: false,
     userScore: 3,
-    scoreIsClicked: false
+   
+    
+    
   }),
   computed: {
     latestIsActive() {
@@ -230,13 +235,28 @@ export default {
     updateUserScore() {
       this.userScore = event.target.value;
     },
+    scoreIsClicked(scoreIndex){
+
+      console.log("scoreisclicked körs", scoreIndex);
+      
+    this.itemScoreDisabled[scoreIndex]=false;
+   
+    
+
+    },
     rateActivity(key) {
       this.$emit("rateActivity", { score: this.userScore, key: key });
     }
+  
   },
-
+  mounted(){
+    console.log("list/mounted, itemscoredisabled: ", this.itemScoreDisabled);
+    
+  },
+  
   props: {
-    activityList: Array
+    activityList: Array,
+    itemScoreDisabled:Array,
   }
 }; //slut export default
 </script>
