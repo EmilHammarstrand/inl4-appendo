@@ -6,7 +6,7 @@
       <button :class="categoryIsActive" @click="sortByThis('category')">Category</button>
       <button :class="tipsterIsActive" @click="sortByThis('tipster')">Tipster</button>
       <button :class="estimatedTimeIsActive" @click="sortByThis('estimatedTime')">Time</button>
-      <button :class="scoreIsActive" @click="sortByThis('score')">Score</button>
+      <button :class="scoreIsActive" @click="sortByThis('score')">Score</button> 
     </div>
 
     <div class="scroll-list">
@@ -38,6 +38,8 @@
             alt="delete"
             class="delete"
           />
+
+          <div class="ratePart">
           <label for="score">Rate activity:</label>
 
           <select
@@ -57,8 +59,7 @@
             <span class="score">Score:</span>
             {{activity.score}}
           </p>
-          <!-- ändrat här! -->
-          <p>{{scoreIsClicked}}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -283,8 +284,15 @@ p.score {
   display: inline-flex;
 }
 
+
 span {
   font-weight: 600;
+}
+
+label {
+  margin-top: 1.5em;
+  margin-bottom: 0rem;
+  white-space: nowrap;
 }
 h3 {
   padding-top: 0.5em;
@@ -295,6 +303,7 @@ p {
   margin: 0.3rem 0.3rem 0.3rem 0.5rem;
   font-size: 1rem;
 }
+
 p.created,
 span.created {
   font-size: 0.7rem;
@@ -345,7 +354,8 @@ select {
 img.delete {
   object-fit: scale-down;
   height: 3rem;
-  padding: 0.5rem;
+  margin-top: 1.2em;
+  /* padding: 0.5rem; */
   cursor: pointer;
 }
 
@@ -385,6 +395,49 @@ img.delete {
   .scroll-list {
   grid-template-columns: 1fr;
 }
+
+}
+
+@media(max-width: 540px) {
+
+button{
+  font-size: 70%;
+}
+
+p.score {
+  display: inline-flex;
+  margin-left: 0px;
+}
+
+.activityCard{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.ratePart{
+  display: flex;
+  flex-direction: column;
+}
+
+.optionDiv {
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+}
+
+.sortButtons > button {
+  background-color: #96bb53;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border: 1px solid rgba(117, 114, 114, 0.185);
+  width: 16.66%;
+  opacity: 95%;
+  /*border-radius:0.5em;*/
+  font-weight: bold;
+}
+
+
 
 }
 
