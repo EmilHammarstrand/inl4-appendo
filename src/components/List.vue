@@ -52,11 +52,13 @@
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <button @click="rateActivity(activity.activity)" :disabled="!scoreIsClicked">Submit</button>
+          <button @click="rateActivity(activity.activity)" :disabled="!scoreIsClicked" class="scoreSubmitButton">Submit</button>
           <p class="score">
             <span class="score">Score:</span>
             {{activity.score}}
           </p>
+          <!-- ändrat här! -->
+          <p>{{scoreIsClicked}}</p>
         </div>
       </div>
     </div>
@@ -315,7 +317,7 @@ span.score {
 select {
   margin-top: 0.3rem;
 }
-.optionDiv button {
+.optionDiv > .scoreSubmitButton {
   width: 4rem;
   margin-top: 0.3rem;
   border-radius: 4px;
@@ -325,8 +327,11 @@ select {
   background-color: #17a2b8;
   font-weight: bold;
 }
-
-
+.optionDiv > .scoreSubmitButton:disabled{
+  background-color:grey;
+  color:rgb(73, 73, 73);
+  cursor: not-allowed
+}
 
 .optionDiv select {
   width: 4rem;
