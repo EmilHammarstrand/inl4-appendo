@@ -174,6 +174,9 @@ export default {
   width: 40;
   margin-left: 20px;
   cursor: pointer;
+
+
+
 }
 
 

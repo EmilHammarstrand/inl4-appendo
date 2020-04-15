@@ -400,6 +400,12 @@ img.delete {
 }
 
 
+
+
+
+
+
+
 /* @media (max-width: 769px) {
   .sortButtons > button {
     background-color: #96bb53;
