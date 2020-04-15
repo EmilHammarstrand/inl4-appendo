@@ -1,5 +1,5 @@
 <template>
-  <div class="root">
+  <div class="root y">
     <div class="sortButtons">
       <button :class="latestIsActive" @click="sortByThis('latest')">Latest</button>
       <button :class="activityIsActive" @click="sortByThis('activity')">Activity</button>
@@ -263,7 +263,6 @@ div.activityCard:nth-child(odd){
   overflow-y: scroll;
   max-height: 750px;
   min-height: 250px;
-  margin: 0px 20px 0px 20px;
   border-bottom-left-radius: 15px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -346,14 +345,16 @@ img.delete {
 }
 
 .sortButtons {
-  margin-left: 20px;
+  display: flex;
+
+  width: 100%;
 }
 
 .sortButtons > button {
   background-color: #96bb53;
   padding: 0.5em;
   border: 1px solid rgba(117, 114, 114, 0.185);
-  width: 16.46%;
+  width: 16.66%;
   opacity: 95%;
   /*border-radius:0.5em;*/
 }
@@ -374,19 +375,23 @@ img.delete {
   background: rgb(61, 60, 60);
 }
 
-@media (max-width: 412px) {
-  .sortButtons > button {
-    background-color: #96bb53;
-    padding: 0.5em;
-    font-size: 12px;
-    border: 1px solid white;
-    width: 15.86%;
-    /*border-radius:0.5em;*/
-  }
+@media (max-width: 950px) {
+
+  .scroll-list {
+  grid-template-columns: 1fr;
+}
+
 }
 
 .items{
   margin-left: 2em;
+}
+
+.y {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  margin: 0 auto;
 }
 
 

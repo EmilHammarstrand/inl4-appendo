@@ -135,8 +135,6 @@ export default {
     }
   },
   updated() {
-    console.log("I updated");
-
     localStorage.setItem("activityList", JSON.stringify(this.activityList));
   }
 };
