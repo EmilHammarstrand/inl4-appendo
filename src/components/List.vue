@@ -252,7 +252,7 @@ div.activityCard {
   color: white;
   display: flex;
   justify-content: space-between;
-  
+
 }
 
 div.activityCard:nth-child(odd){
