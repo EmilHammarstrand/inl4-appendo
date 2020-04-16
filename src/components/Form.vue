@@ -114,9 +114,8 @@ export default {
 
     methods: {
 
-        myFunc(){
+        timeoutFunc(){
             this.showSuccessMessage = false;
-            console.log("go")
         },
 
         postActivityBtn(){
@@ -150,8 +149,7 @@ export default {
             this.showSuccessMessage = true;
             
 
-            setTimeout(this.myFunc, 3000)
-
+            setTimeout(this.timeoutFunc, 3000)
         },
 
         findDuplicate(activity){
