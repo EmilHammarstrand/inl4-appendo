@@ -90,7 +90,7 @@ export default {
 div.activityCard {
   border-bottom: 1px solid grey;
   background-color: #465f6f;
-  opacity: 87%;
+  opacity: 0.87;
   color: white;
   display: flex;
   justify-content: space-between;

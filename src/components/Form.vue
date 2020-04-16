@@ -212,7 +212,7 @@ export default {
     }
 
     #opt {
-        opacity: 80%;
+        opacity: 0.8;
         font-size: 75%;
     }
 

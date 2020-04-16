@@ -210,7 +210,7 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: #465f6f;
-  opacity: 87%;
+  opacity: 0.87;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
 
@@ -237,7 +237,7 @@ export default {
   padding: 0.5em;
   border: 1px solid rgba(117, 114, 114, 0.185);
   width: 16.66%;
-  opacity: 95%;
+  opacity: 0.95;
   /*border-radius:0.5em;*/
 }
 
