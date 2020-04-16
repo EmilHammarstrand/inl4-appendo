@@ -213,11 +213,23 @@ export default {
         color: chartreuse;
         font-size: 20px;
         font-weight: 600;
-
     }
 
     .rootTwo div {
         position: relative
     }
+
+    @media(max-width: 600px) {
+
+    .error{
+            color: #ff0000db;
+            display: block;
+            font-weight: 600;
+            font-size: 18px;
+            position: relative;
+            margin-top: 0.2em;
+        }
+}
+
 
 </style>
