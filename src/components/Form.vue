@@ -114,6 +114,11 @@ export default {
 
     methods: {
 
+        myFunc(){
+            this.showSuccessMessage = false;
+            console.log("go")
+        },
+
         postActivityBtn(){
 
             if(this.name == ""){
@@ -143,6 +148,10 @@ export default {
             this.timeIsTouched = false;
 
             this.showSuccessMessage = true;
+            
+
+            setTimeout(this.myFunc, 3000)
+
         },
 
         findDuplicate(activity){
@@ -213,6 +222,7 @@ export default {
         color: chartreuse;
         font-size: 20px;
         font-weight: 600;
+        
     }
 
     .rootTwo div {
